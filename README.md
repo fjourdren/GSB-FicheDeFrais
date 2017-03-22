@@ -1,2 +1,2 @@
-# GSB-FicheDeFrais
+# GSP-FicheDeFrais
 Projet BTS SIO

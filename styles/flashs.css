@@ -1,0 +1,45 @@
+@CHARSET "ISO-8859-1";
+
+
+/* flashs ! */
+div.flash {
+	width: 90%;
+	min-height: 50px;
+	
+	background-color: #66A3D3;
+    border-color: #55a12c;
+	
+	margin: auto;
+	margin: 5px auto;
+	
+	padding: 6px;
+	
+	text-align: left;
+
+	box-shadow: -1px 2px 5px 1px rgba(0, 0, 0, 0.7); 
+	
+	background-size: 40px 40px;
+	background-image: -webkit-gradient(linear, left top, right bottom,
+                color-stop(.25, rgba(255, 255, 255, .05)), color-stop(.25, transparent),
+                color-stop(.5, transparent), color-stop(.5, rgba(255, 255, 255, .05)),
+                color-stop(.75, rgba(255, 255, 255, .05)), color-stop(.75, transparent),
+                         to(transparent));
+
+	margin-bottom: 10px;
+}
+
+div.flash.Succès{
+     background-color: #66A3D3;
+     border-color: #55a12c;
+}
+
+div.flash.Erreur{
+     background-color: #ec9393;
+     border-color: #c43d3d;
+}
+
+img.flashCloseButton {
+	height: 25px;
+	width: auto;
+	float: right;
+}

@@ -1,0 +1,210 @@
+@CHARSET "ISO-8859-1";
+
+/* Generals */
+* {
+	margin: 0;	
+}
+
+body, html {
+	height: 100%;
+	
+	background: #e0e0e0;
+	background-image:linear-gradient(white, #66A3D3);
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+}
+
+
+
+
+/* MENU */
+div.menu {
+	border-right: 1px solid black;
+	display: block;
+	min-height: 100%;
+	position: fixed;
+	width: 250px;
+	padding: 0px;
+	text-align: center;
+}
+
+div.menu ul.navigation {
+	box-shadow: -1px 2px 5px 1px rgba(0, 0, 0, 0.7); 
+	margin: 0;
+	padding: 0;
+	width: 80%;
+	border: 1px solid black;
+	border-bottom: 0px;
+	list-style: none;
+	margin: auto;
+	margin-bottom: 20px;
+}
+
+div.menu ul.navigation li {
+	border-bottom: 1px solid black;
+	background: #e8edff url('images/gradback.png') repeat-x;
+}
+
+div.menu ul.navigation a {
+	font-size: 14px;
+    color: #039;
+	text-decoration: none;
+}
+
+div.menu ul.navigation li:hover {
+    color: #339;
+	text-decoration: underline;
+	font-weight: bold;
+}
+
+/* GESTION DUN AUTRE ELEMENT DANS LE MENU QUE UN LIEN */
+div.menu ul.navigation li.other {
+	font-size: 16px;
+}
+
+div.menu ul.navigation li.other:hover {
+	background: none;
+	background-color: #e8edff;
+	font-size: 16px;
+    color: #000;
+	text-decoration: none;
+	font-weight: 400;
+}
+
+
+/* GESTION TITRE MENUS */
+div.menu ul.navigation li.title {
+	background: none;
+	background-color: #66A3D3;
+	color: #039;
+	font-weight: bold;
+}
+
+div.menu ul.navigation li.title:hover {
+	background: none;
+	background-color: #66A3D3;
+	color: #039;
+	text-decoration: none;
+}
+
+
+
+
+/* LOGO */
+div.menu img.logo {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	width: 92%;
+	height: auto;
+}
+
+
+
+
+/* wrap */
+div.wrap {
+	margin-top: 0;
+	margin-left: 250px;
+}
+
+
+
+/* content */
+div.wrap div.content {
+	padding: 20px 20px;
+	text-align: center;
+	min-height: 100%;
+}
+
+/* tables */
+div.wrap div.content table {
+	margin: auto;
+	box-shadow: -1px 2px 5px 1px rgba(0, 0, 0, 0.7); 
+    min-width: 50%;
+    text-align: center;
+}
+
+div.wrap div.content table thead {
+    font-weight: bold;
+    padding: 8px;
+    background: #66A3D3 ;
+    border-top: 2px solid #d3ddff;
+    border-bottom: 1px solid #fff;
+    color: #039;
+}
+
+div.wrap div.content table td {
+    padding: 8px;
+    border-bottom: 1px solid #fff;
+    color: #669;
+    border-top: 1px solid #fff;
+    background: #e8edff url('http://1.bp.blogspot.com/_xDpoN6UfFFY/S-J2f5yBC3I/AAAAAAAACbY/zWXYXsR-w5E/s1600/gradback.png') repeat-x;
+}
+
+div.wrap div.content table tfoot tr td {
+    background: #e8edff;
+    font-size: 16px;
+    color: #99c;
+}
+
+div.wrap div.content table tbody tr:hover td {
+    background: #d0dafd url('http://4.bp.blogspot.com/_xDpoN6UfFFY/S-J2hsztUzI/AAAAAAAACbo/ztV1CK0RUrE/s1600/gradhover.png') repeat-x;
+    color: #339;
+}
+
+div.wrap div.content table td.tdTableGauche {
+	font-weight: bold;
+    padding: 8px;
+    background: #66A3D3 ;
+    border-top: 2px solid #d3ddff;
+    border-bottom: 1px solid #fff;
+    color: #039;
+}
+
+div.wrap div.content table a:hover {
+    text-decoration: underline;
+}
+
+
+/* ICONE/PICTOGRAMME */
+div.wrap div.content input.icone {
+	height: 50px;
+	width: auto;
+}
+
+div.wrap div.content button.icone {
+	border: none;
+	background: none;
+	cursor: pointer;
+}
+
+div.wrap div.content button.icone img {
+	height: 50px;
+	width: auto;
+}
+
+div.wrap div.content img.icone {
+	height: 50px;
+	width: auto;
+}
+
+div.wrap div.content a.backButton {
+	text-align: left;
+	display: block;
+	outline: 0;
+	width: 50px;
+}
+
+
+
+
+/* Footer */
+div.wrap div.footer {
+	position: relative;
+	bottom: 0;
+	background-color: #000;
+	color: #fff;
+	width: 100%;
+	min-height: 60px;
+	text-align: center;
+}
