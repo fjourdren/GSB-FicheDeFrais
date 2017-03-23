@@ -127,7 +127,7 @@ executeSQL($sql);
 
 
 //mise en session du message flash
-addFlash('Succ&#232;s', 'Fiche de frais cr&#233;&#233;');
+addFlash('Succ&#232;s', 'Fiche de frais cr&#233;&#233;e');
 header('location: visiteur-ajouterForm.php');
 exit;
 

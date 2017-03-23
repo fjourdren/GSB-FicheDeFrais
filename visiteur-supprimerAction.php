@@ -45,6 +45,6 @@ executeSQL($sql);
 
 
 
-addFlash('Succès', 'Fiche de frais supprim&#233;');
+addFlash('Succ&egrave;s', 'Fiche de frais supprim&#233;');
 header('location: visiteur-listeFicheFrais.php');
 exit;

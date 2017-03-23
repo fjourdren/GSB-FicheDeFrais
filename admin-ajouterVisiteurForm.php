@@ -39,7 +39,7 @@ include 'layouts/flash.inc.php';
 			</tr>
 			
 			<tr>
-				<td><label for="cp">Code postale :</label></td>
+				<td><label for="cp">Code postal :</label></td>
 				<td><input type="text" name="cp" /></td>
 			</tr>
 			
