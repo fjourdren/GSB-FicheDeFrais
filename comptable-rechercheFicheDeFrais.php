@@ -128,6 +128,8 @@ include 'layouts/flash.inc.php';
 	</fieldset>
 
 </form>
+
+<br/>
 	
 <?php
 
@@ -217,7 +219,7 @@ include 'layouts/flash.inc.php';
 						foreach ($fiche['lignes'] as $ligne) {
 							echo '<tr>
 								<td class="tdTableGauche">'.secureDataAAfficher($ligne['libelle'])." <br/>(".secureDataAAfficher($ligne['montant']).'&euro;)</td>
-								<td>Quantité: '.secureDataAAfficher($ligne['quantite']).' <br/>(Total: '.secureDataAAfficher($ligne['quantite']*$ligne['montant']).'&euro;)</td>
+								<td>Quantit&#233;: '.secureDataAAfficher($ligne['quantite']).' <br/>(Total: '.secureDataAAfficher($ligne['quantite']*$ligne['montant']).'&euro;)</td>
 							</tr>';
 						}
 						

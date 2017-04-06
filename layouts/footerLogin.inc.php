@@ -2,9 +2,9 @@
 			</div>
 			
 			<!-- FOOTER -->
-			<div class="footer">
+			<!--<div class="footer">
 				<p>GALAXY SWISS BOURDIN</p>
-			</div>
+			</div>-->
 
 		<!-- FIN WRAP -->
 		</div>

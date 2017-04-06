@@ -124,30 +124,4 @@ addFlash('Succ&#232;s', 'Fiche de frais modifi&#233;');
 header('location: visiteur-listeFicheFrais.php');
 exit;
 
-
-
-
-
-
-
-exit;
-
-
-
-//nouveau montant fiche de frais
-$sql = "SELECT * FROM forfait";
-$forfaitMontant = tableSQL($sql);
-
-$montant = ($repas*$forfaitMontant[3]['montant']) 
-			+ ($nuitees*$forfaitMontant[2]['montant']) 
-			+ ($etape*$forfaitMontant[0]['montant']) 
-			+ ($km*$forfaitMontant[1]['montant']);
-
-
-
-
-
-
-addFlash('Succ&#232;s', 'Fiche de frais modifi&#233;');
-header('location: visiteur-listeFicheFrais.php');
-exit;
+?>

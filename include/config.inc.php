@@ -17,7 +17,7 @@ switch ($_SERVER["HTTP_HOST"]) {
 		define("MysqlDATABASE", "gsb");
 		define("MysqlPORT", 3306);
 		break;
-	
+
 
 	default:
 		echo "<h1>Erreur de config</h1>";
