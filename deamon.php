@@ -1,12 +1,6 @@
 <?php
 
 require_once 'include/config.inc.php';
-
-if($_GET['pwd'] != PWD_DEAMON) {
-	header('location: index.php');
-	exit;
-}
-
 require_once 'include/AccesDonneesInit.inc.php';
 
 //vérification de la date du jour
