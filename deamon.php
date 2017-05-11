@@ -3,6 +3,7 @@
 require_once 'include/config.inc.php';
 require_once 'include/AccesDonneesInit.inc.php';
 
+
 //vérification de la date du jour
 if(date('j') == NUMERO_JOUR_DE_CLOTURE) {
 	$mois  = date('n');

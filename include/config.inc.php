@@ -10,6 +10,7 @@ if(php_sapi_name() === 'cli') {
 	$host = $_SERVER["HTTP_HOST"];
 }
 
+
 switch ($host) {
 
 	case 'localhost':
