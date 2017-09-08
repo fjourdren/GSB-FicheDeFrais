@@ -16,6 +16,10 @@
 		<script src="js/flashClick.js"></script>
 
 		<meta name="robots" content="noindex, nofollow" />
+		
+		<script type="text/javascript">
+			var NUMERO_JOUR_DE_CLOTURE = "<?php echo NUMERO_JOUR_DE_CLOTURE; ?>";
+		</script>
 			
 	</head>
 

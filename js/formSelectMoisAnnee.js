@@ -23,7 +23,13 @@ function changeDate () {
 	select.empty();
 	
 	if (parseInt($('#annee').val()) == date.getFullYear()) { // LÃ  on vÃ©rifie que si c'est la celle qui est actuel alors :
-		for(var i = 1; i < date.getMonth() + 2; i++) {
+		
+		var monthAddition = 2;
+		if(date.getDate() >= NUMERO_JOUR_DE_CLOTURE) { //si la date actuel dépasse la date de la cloture de fiche de frais on passe au mois suivant
+			monthAddition++;
+		}
+		
+		for(var i = 1; i < date.getMonth() + monthAddition; i++) {
 
 			if(i < 10) {
 				select.append($("<option></option>")
@@ -35,13 +41,11 @@ function changeDate () {
 					.text(i));
 			}
 
-
-			
 		}
 
 		// valeur par défaut pour l'année actuel
-		var mois       = getUrlParameter('mois');
-		$('#mois option').each(function(){
+		var mois = getUrlParameter('mois');
+		$('#mois option').each(function() {
 			
 			if(mois != null) {
 				
@@ -51,8 +55,14 @@ function changeDate () {
 				
 			} else {
 				
-				if($(this).attr("value") == date.getMonth()+1) {
-					$(this).attr("selected", "selected");
+				if(date.getDate() >= NUMERO_JOUR_DE_CLOTURE) { //si la date actuel dépasse la date de la cloture de fiche de frais on passe au mois suivant
+					if($(this).attr("value") == date.getMonth()+2) {
+						$(this).attr("selected", "selected");
+					}
+				} else {
+					if($(this).attr("value") == date.getMonth()+1) {
+						$(this).attr("selected", "selected");
+					}
 				}
 				
 			}
