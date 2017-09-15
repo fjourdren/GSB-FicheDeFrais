@@ -96,16 +96,44 @@ include 'layouts/flash.inc.php';
                 <td colspan="2"><label for="nbJustificatifs">Nombre justificatif :</label></td>
                 <td colspan="2"><input id="nbJustificatifs" name="nbJustificatifs" type="number" min="0" value="0" size="5" /></td>
             </tr>
-			
-			<tr>
-				<td colspan="4"><button class="icone" title="R&#233;initialiser" type="reset"><img src="images/icones/reset.png" alt="R&#233;initialiser"></button><input class="icone" type="image" src="images/icones/save.png" title="Ajouter la fiche de frais" alt="Ajouter la fiche de frais" /></td>
-			</tr>
 				
 		</table>
 		
 		<!-- Gestion du mois par rapport à l'année -->
 		<script src="js/formSelectMoisAnnee.js"></script>
 		
+		<br />
+		
+		<table class="align">
+			<tr>
+				<td colspan="2"><h3>Hors forfaits</h3></td>
+			</tr>
+		
+			<tr>
+				<input id="horsForfaitNumber" name="horsForfaitNumber" type="hidden" value="0" />
+				<td><div id="horsForfaitContainer"></div></td>
+			</tr>
+			
+			<tr>
+				<td colspan="2">
+					<img class="icone" onclick="ajouter_horsForfait()" src="images/icones/add.png" alt="R&#233;initialiser">
+		  			<img class="icone" onclick="retirer_horsForfait()" src="images/icones/remove.png" alt="R&#233;initialiser">
+		  		</td>
+			</tr>
+		
+		</table>
+		
+		<!-- js pour ajouter les inputs hors forfait dynamiquement -->
+		<script src="js/horsForfait.js"></script>
+		
+		<br />
+		
+		<table class="align">
+			<tr>
+				<td colspan="4"><button class="icone" title="R&#233;initialiser" type="reset"><img src="images/icones/reset.png" alt="R&#233;initialiser"></button><input class="icone" type="image" src="images/icones/save.png" title="Ajouter la fiche de frais" alt="Ajouter la fiche de frais" /></td>
+			</tr>
+		</table>
+
 	</fieldset>
 </form>
 

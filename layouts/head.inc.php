@@ -20,7 +20,7 @@
 		<script type="text/javascript">
 			var NUMERO_JOUR_DE_CLOTURE = "<?php echo NUMERO_JOUR_DE_CLOTURE; ?>";
 		</script>
-			
+		
 	</head>
 
 	<body>

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- GÃ©nÃ©rÃ© le :  Mer 14 DÃ©cembre 2016 Ã  14:56
+-- Généré le :  Mer 14 Décembre 2016 à 14:56
 -- Version du serveur :  5.6.15-log
 -- Version de PHP :  5.5.12
 
@@ -17,7 +17,7 @@ SET time_zone = "+01:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Base de donnÃ©es :  `gsb`
+-- Base de données :  `gsb`
 --
 
 -- --------------------------------------------------------
@@ -36,10 +36,10 @@ CREATE TABLE IF NOT EXISTS `etat` (
 --
 
 INSERT INTO `etat` (`id`, `libelle`) VALUES
-('CL', 'Saisie clÃ´turÃ©e'),
-('CR', 'Fiche crÃ©Ã©e, saisie en cours'),
-('RB', 'RemboursÃ©e'),
-('VA', 'ValidÃ©e et mise en paiement');
+('CL', 'Saisie clôturée'),
+('CR', 'Fiche créée, saisie en cours'),
+('RB', 'Remboursée'),
+('VA', 'Validée et mise en paiement');
 
 -- --------------------------------------------------------
 
@@ -76,9 +76,9 @@ CREATE TABLE IF NOT EXISTS `forfait` (
 
 INSERT INTO `forfait` (`id`, `libelle`, `montant`) VALUES
 ('ETP', 'Forfait Etape', '110.00'),
-('KM', 'Frais KilomÃ©trique', '0.62'),
+('KM', 'Frais Kilométrique', '0.62'),
 ('REP', 'Repas Restaurant', '25.00'),
-('NUI', 'NuitÃ©e HÃ´tel', '80.00');
+('NUI', 'Nuitée Hôtel', '80.00');
 
 -- --------------------------------------------------------
 
@@ -112,7 +112,7 @@ CREATE TABLE IF NOT EXISTS `visiteur` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Index pour les tables exportÃ©es
+-- Index pour les tables exportées
 --
 
 --
@@ -140,7 +140,7 @@ ALTER TABLE `lignefraisforfait`
  ADD PRIMARY KEY (`idFicheFrais`,`idForfait`), ADD KEY `idForfait` (`idForfait`);
 
 --
--- AUTO_INCREMENT pour les tables exportÃ©es
+-- AUTO_INCREMENT pour les tables exportées
 --
 
 --
@@ -149,7 +149,7 @@ ALTER TABLE `lignefraisforfait`
 ALTER TABLE `fichefrais`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- Contraintes pour les tables exportÃ©es
+-- Contraintes pour les tables exportées
 --
 
 --

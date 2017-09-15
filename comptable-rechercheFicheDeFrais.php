@@ -209,10 +209,14 @@ include 'layouts/flash.inc.php';
 ?>
 			
 			<table border="1">
-
-				
+			
+				<thead>
+					<tr>
+						<td class="tdTableGauche" colspan="2"><h3>Forfaits</h3></td>
+					</tr>
+				</thead>
+			
 				<tbody>
-					
 						<?php
 						
 						//affichage du contenu
@@ -230,34 +234,83 @@ include 'layouts/flash.inc.php';
 						</tr>';
 
 					?>
-						<tr>
-							<td colspan="2">
-
-								<?php
-									if($fiche['idEtat'] != "CR") {
-
-										switch($fiche['idEtat']) {
-											case "CL":
-												echo '<a href="comptable-changerEtatAction.php?idFicheFrais='.secureDataAAfficher($fiche['id']).'&etat=VA"><h3>Valider la fiche de frais</h3></a>';
-												break;
-											case "VA":
-												echo '<a href="comptable-changerEtatAction.php?idFicheFrais='.secureDataAAfficher($fiche['id']).'&etat=RB"><h3>Passer la fiche de frais en &#233tat "Rembours&#233;"</h3></a>';
-												break;
-											case "RB":
-												echo "<h3>Cette fiche est d&#233;j&agrave; rembours&#233;</h3>";
-												break;
-											default:
-												echo "<h3>Erreur d'état de la fiche de frais</h3>";
-										}
-
-									} else {
-										echo "<h3>Cette fiche n'est pas encore clotur&#233;.</h3>";
-									}
-								?>
-
-							</td>
-						</tr>
+						
+				</tbody>
+			</table>
 			
+			<br />
+			
+			<table border="1">
+				
+				<thead>
+					<tr>
+						<td class="tdTableGauche" colspan="2"><h3>Hors forfaits</h3></td>
+					</tr>
+				</thead>
+			
+				<tbody>
+						<?php
+						
+						//affichage du contenu
+						foreach ($fiche['lignes'] as $ligne) {
+							echo '<tr>
+								<td class="tdTableGauche">'.secureDataAAfficher($ligne['libelle'])." <br/>(".secureDataAAfficher($ligne['montant']).'&euro;)</td>
+								<td>Quantit&#233;: '.secureDataAAfficher($ligne['quantite']).' <br/>(Total: '.secureDataAAfficher($ligne['quantite']*$ligne['montant']).'&euro;)</td>
+							</tr>';
+						}
+						
+
+						
+
+					?>
+						
+				</tbody>
+			</table>
+			
+			<br>
+			
+			<table border="1">
+				<thead>
+					<tr>
+						<td class="tdTableGauche" colspan="2"><h3>&#201;tat</h3></td>
+					</tr>
+				</thead>
+			
+				<tbody>
+				
+					<tr>
+						<?php
+							echo '<td>'.secureDataAAfficher($fiche['etatLibelle']).'</td>';
+						?>
+					</tr>
+				
+					<tr>
+						<td>
+	
+							<?php
+								if($fiche['idEtat'] != "CR") {
+	
+									switch($fiche['idEtat']) {
+										case "CL":
+											echo '<a href="comptable-changerEtatAction.php?idFicheFrais='.secureDataAAfficher($fiche['id']).'&etat=VA"><h3>Valider la fiche de frais</h3></a>';
+											break;
+										case "VA":
+											echo '<a href="comptable-changerEtatAction.php?idFicheFrais='.secureDataAAfficher($fiche['id']).'&etat=RB"><h3>Passer la fiche de frais en &#233tat "Rembours&#233;"</h3></a>';
+											break;
+										case "RB":
+											echo "<h3>Cette fiche est d&#233;j&agrave; rembours&#233;</h3>";
+											break;
+										default:
+											echo "<h3>Erreur d'état de la fiche de frais</h3>";
+									}
+	
+								} else {
+									echo "<h3>Cette fiche n'est pas encore clotur&#233;.</h3>";
+								}
+							?>
+	
+						</td>
+					</tr>
 				</tbody>
 			</table>
 

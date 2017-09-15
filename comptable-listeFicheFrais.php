@@ -45,7 +45,6 @@ if(count($fichesfraisList) != 0) {
 		}
 	
 	
-	
 		//récupération du libelle de l'état
 		$idEtat = $fiche['idEtat'];
 	
@@ -53,41 +52,7 @@ if(count($fichesfraisList) != 0) {
 		WHERE id = '$idEtat' 
 		LIMIT 1";
 		$fichesfraisList[$keyFiche]['etatLibelle'] = champSQL($sql);
-	
-	
-		$sql          = "SELECT * FROM forfait";
-		$listeForfait = tableSQL($sql);
-	
-		
-		foreach ($listeForfait as $keyForfait => $forfait) {
-	
-			//on retire les id numériques du tableau
-			foreach ($forfait as $key => $valueForfait) {
-				if(is_numeric($key)) {
-					unset($listeForfait[$keyForfait][$key]);
-				}
-			}
-	
-	
-			//on récupére les de chaque champ pour chaque fiche de frais
-			$idFiche   = $fiche['id'];
-			$idForfait = $forfait['id'];
-	
-	
-			//on récupére le montant et la quantité et on les mets dans un tableau
-			$sql = "SELECT quantite FROM lignefraisforfait
-					WHERE idFicheFrais = '$idFiche'
-					AND idForfait = '$idForfait'";
-			$quantite = secureVariable(champSQL($sql));
-	
-			if(!$quantite)
-				$quantite = 0;
-	
-	
-			$fichesfraisList[$keyFiche]['lignes'][] = array("forfait" => $idForfait, "quantite" => $quantite, "montant" => $forfait['montant']);
-	
-		}
-	
+
 	}
 	
 	
@@ -99,14 +64,7 @@ if(count($fichesfraisList) != 0) {
 			<tr>
 				<th>Visiteur</th>
 				<th>Mois</th>
-				<th>Ann&#233;e</th>
-	
-				<?php
-					foreach ($listeForfait as $forfait) {
-						echo '<th>'.secureDataAAfficher($forfait['libelle']).' ('.secureDataAAfficher($forfait['montant']).'&euro;)</th>';
-					}
-				?>
-	
+				<th>Ann&#233;e</th>	
 				<th>Nombre de justificatif</th>
 				<th>Montant</th>
 				<th>Etat</th>
@@ -123,12 +81,6 @@ if(count($fichesfraisList) != 0) {
 						echo '<td>'.secureDataAAfficher($fiche['visiteur']).'</td>';
 						echo '<td>'.secureDataAAfficher($fiche['mois']).'</td>';
 						echo '<td>'.secureDataAAfficher($fiche['annee']).'</td>';
-	
-						//affichage des toutes les lignes de frais
-						foreach ($fiche['lignes'] as $ligne) {
-							echo '<td>Quantit&#233;: '.secureDataAAfficher($ligne['quantite']).' (Total: '.secureDataAAfficher($ligne['montant']*$ligne['quantite']).'&euro;)</td>'; 
-						}
-	
 						echo '<td>'.secureDataAAfficher($fiche['nbJustificatifs']).'</td>';
 						echo '<td>'.secureDataAAfficher($fiche['montantValide']).'&euro;</td>';
 						echo '<td>'.secureDataAAfficher($fiche['etatLibelle']).'</td>';

@@ -111,6 +111,26 @@ foreach ($lignesFiche As $ligne) {
 }
 
 
+
+$maxHorsForfait = $_POST['horsForfaitNumber'];
+for($i = 1; $i <= $maxHorsForfait; $i ++) {
+	
+	$libelleHorsForfait= $_POST["horsForfait".$i."Libelle"];
+	$montantHorsForfait = $_POST["horsForfait".$i."Montant"];
+	
+	if(($montantHorsForfait< 0)
+			|| (!is_numeric($montantHorsForfait))) {
+				addFlash('Erreur', 'Les valeurs de hors forfait doivent &#234;tre des nombres positifs.');
+				header('location: visiteur-ajouterForm.php');
+			}
+			
+			//insert
+			
+			$montant+= $montantHorsForfait;
+}
+
+
+
 //upload le montant de la fiche de frais et le nombre de justificatif
 $sql = "UPDATE fichefrais
 SET montantValide='$montant',
