@@ -23,7 +23,7 @@ switch ($host) {
 		define("MysqlPORT", 3306);
 		break;
 
-	case false:
+	case false:	//config cli
 		define("MysqlURL", "localhost");
 		define("MysqlUSER", "root");
 		define("MysqlPWD", "");

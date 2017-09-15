@@ -51,8 +51,8 @@ CREATE TABLE IF NOT EXISTS `fichefrais` (
   `id` int(11) NOT NULL,
   `idVisiteur` int NOT NULL,
   `mois` tinyint(3) unsigned NOT NULL,
-  `annee` int unsigned NOT NULL,
-  `nbJustificatifs` int(11) DEFAULT 0,
+  `annee` SMALLINT unsigned NOT NULL,
+  `nbJustificatifs` SMALLINT DEFAULT 0,
   `montantValide` decimal(10,2) DEFAULT NULL,
   `dateModif` date DEFAULT NULL,
   `idEtat` char(2) DEFAULT 'CR'
