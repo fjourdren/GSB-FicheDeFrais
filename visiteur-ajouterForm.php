@@ -21,7 +21,10 @@ include 'layouts/flash.inc.php';
 	<fieldset>
 	
 		<legend>Ajouter fiche de frais</legend>			
-			
+		
+		<!-- Gestion du mois par rapport à l'année -->
+		<script src="js/formSelectMoisAnnee.js"></script>
+
 		<table class="align">
 			<tr>
 				<td><label for="mois">Mois (2 chiffres):</label></td>
@@ -99,11 +102,11 @@ include 'layouts/flash.inc.php';
 				
 		</table>
 		
-		<!-- Gestion du mois par rapport à l'année -->
-		<script src="js/formSelectMoisAnnee.js"></script>
-		
 		<br />
 		
+		<!-- js pour ajouter les inputs hors forfait dynamiquement -->
+		<script src="js/horsForfait.js"></script>
+
 		<table class="align">
 			<tr>
 				<td colspan="2"><h3>Hors forfaits</h3></td>
@@ -122,9 +125,6 @@ include 'layouts/flash.inc.php';
 			</tr>
 		
 		</table>
-		
-		<!-- js pour ajouter les inputs hors forfait dynamiquement -->
-		<script src="js/horsForfait.js"></script>
 		
 		<br />
 		

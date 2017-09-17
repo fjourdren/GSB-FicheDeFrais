@@ -168,8 +168,8 @@ include 'layouts/flash.inc.php';
 		$idEtat = $fiche['idEtat'];
 
 		$sql = "SELECT libelle FROM etat 
-		WHERE id = '$idEtat' 
-		LIMIT 1";
+				WHERE id = '$idEtat' 
+				LIMIT 1";
 		$fiche['etatLibelle'] = champSQL($sql);
 
 
@@ -205,6 +205,20 @@ include 'layouts/flash.inc.php';
 			$fiche['lignes'][] = array("forfait" => $idForfait, "libelle" => $forfait['libelle'], "quantite" => $quantite, "montant" => $forfait['montant']);
 
 		}
+
+
+
+
+		//hors forfait
+		$sql = "SELECT * FROM LigneFraisHorsForfait
+				WHERE idFicheFrais = '$idFiche'";
+
+		$horsForfaitsResult = tableSQL($sql);
+
+		foreach ($horsForfaitsResult as $key => $horsForfaitItem) {
+		$fiche['lignesFraisHorsForfait'][] = array("libelle" => $horsForfaitItem['libFraisHF'], "quantite" => $horsForfaitItem['quantite'], "montant" => $horsForfaitItem['montant']);
+		}
+		
 
 ?>
 			
@@ -252,7 +266,7 @@ include 'layouts/flash.inc.php';
 						<?php
 						
 						//affichage du contenu
-						foreach ($fiche['lignes'] as $ligne) {
+						foreach ($fiche['lignesFraisHorsForfait'] as $ligne) {
 							echo '<tr>
 								<td class="tdTableGauche">'.secureDataAAfficher($ligne['libelle'])." <br/>(".secureDataAAfficher($ligne['montant']).'&euro;)</td>
 								<td>Quantit&#233;: '.secureDataAAfficher($ligne['quantite']).' <br/>(Total: '.secureDataAAfficher($ligne['quantite']*$ligne['montant']).'&euro;)</td>

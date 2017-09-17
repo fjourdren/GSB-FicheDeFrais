@@ -1,15 +1,4 @@
--- phpMyAdmin SQL Dump
--- version 4.2.0
--- http://www.phpmyadmin.net
---
--- Client :  127.0.0.1
--- Généré le :  Mer 14 Décembre 2016 à 14:56
--- Version du serveur :  5.6.15-log
--- Version de PHP :  5.5.12
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+01:00";
-
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -17,25 +6,130 @@ SET time_zone = "+01:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Base de données :  `gsb`
+-- Base de données: `gsb_frais`
 --
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `etat`
+-- Structure de la table `Forfait`
 --
 
-CREATE TABLE IF NOT EXISTS `etat` (
+CREATE TABLE IF NOT EXISTS `Forfait` (
+  `id` char(3) NOT NULL,
+  `libelle` char(30) DEFAULT NULL,
+  `montant` decimal(5,2) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB;
+
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `Etat`
+--
+
+CREATE TABLE IF NOT EXISTS `Etat` (
   `id` char(2) NOT NULL,
-  `libelle` varchar(30) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `libelle` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB;
+
+-- --------------------------------------------------------
 
 --
--- Contenu de la table `etat`
+-- Structure de la table `Visiteur`
 --
 
-INSERT INTO `etat` (`id`, `libelle`) VALUES
+CREATE TABLE IF NOT EXISTS `Visiteur` (
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
+  `nom` varchar(60) NOT NULL,
+  `prenom` varchar(60)  NOT NULL,
+  `adresse` varchar(120) DEFAULT NULL,
+  `cp` char(5) DEFAULT NULL,
+  `ville` varchar(60) DEFAULT NULL,
+  `dateEmbauche` date DEFAULT NULL,
+  `login` char(60) NOT NULL,
+  `pwd` char(32)  NOT NULL,
+
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB;
+
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `FicheFrais`
+--
+
+CREATE TABLE IF NOT EXISTS `Fichefrais` (
+  `id` int(11) UNSIGNED auto_increment,
+  `idVisiteur` int UNSIGNED NOT NULL,
+  `mois` tinyint UNSIGNED NOT NULL,
+  `annee` smallint UNSIGNED NOT NULL,
+  `nbJustificatifs` tinyint UNSIGNED DEFAULT NULL,
+  `montantValide` decimal(10,2) DEFAULT NULL,
+  `dateModif` date DEFAULT NULL,
+  `idEtat` char(2) DEFAULT 'CR',
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`idEtat`) REFERENCES Etat(`id`),
+  FOREIGN KEY (`idVisiteur`) REFERENCES Visiteur(`id`)
+) ENGINE=InnoDB;
+
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `LigneFraisForfait`
+--
+
+CREATE TABLE IF NOT EXISTS `LigneFraisForfait` (
+  `idFicheFrais` int(11) UNSIGNED NOT NULL,
+  `idForfait` char(3) NOT NULL,
+  `quantite` smallint UNSIGNED DEFAULT NULL,
+  PRIMARY KEY (`idFicheFrais`, `idForfait`)
+) ENGINE=InnoDB;
+
+ALTER TABLE `LigneFraisForfait` ADD CONSTRAINT `LigneFraisForfait_FicheFrais` FOREIGN KEY (`idFicheFrais`) REFERENCES `Fichefrais`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `LigneFraisForfait` ADD CONSTRAINT `LigneFraisForfait_Forfait` FOREIGN KEY (`idForfait`) REFERENCES `Forfait`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `LigneFraisHorsForfait`
+--
+
+CREATE TABLE IF NOT EXISTS `LigneFraisHorsForfait` (
+  `idFraisHF`    int(11) UNSIGNED auto_increment,
+  `idFicheFrais` int(11) UNSIGNED NOT NULL,
+  `dteFraisHF`  date DEFAULT NULL,
+  `libFraisHF`  varchar(60) DEFAULT NULL,
+  `quantite`  smallint UNSIGNED DEFAULT NULL,
+  `montant` decimal(10,2) DEFAULT 0,
+  PRIMARY KEY (`idFraisHF`)
+) ENGINE=InnoDB;
+
+ALTER TABLE `LigneFraisHorsForfait` ADD CONSTRAINT `LigneFraisHorsForfait_FicheFrais` FOREIGN KEY (`idFicheFrais`) REFERENCES `Fichefrais`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- --------------------------------------------------------
+
+
+--
+-- Insert `Visiteur`
+--
+
+INSERT INTO Visiteur(nom, prenom, login, pwd, DateEmbauche) VALUES
+('comptable', 'comptable', 'comptable', md5('comptable'), NOW()),
+('admin', 'admin', 'admin', md5('admin'), NOW());
+
+-- --------------------------------------------------------
+
+
+--
+-- Insert `Etat`
+--
+
+INSERT INTO `Etat` (`id`, `libelle`) VALUES
 ('CL', 'Saisie clôturée'),
 ('CR', 'Fiche créée, saisie en cours'),
 ('RB', 'Remboursée'),
@@ -43,134 +137,14 @@ INSERT INTO `etat` (`id`, `libelle`) VALUES
 
 -- --------------------------------------------------------
 
---
--- Structure de la table `fichefrais`
---
-
-CREATE TABLE IF NOT EXISTS `fichefrais` (
-  `id` int(11) NOT NULL,
-  `idVisiteur` int NOT NULL,
-  `mois` tinyint(3) unsigned NOT NULL,
-  `annee` SMALLINT unsigned NOT NULL,
-  `nbJustificatifs` SMALLINT DEFAULT 0,
-  `montantValide` decimal(10,2) DEFAULT NULL,
-  `dateModif` date DEFAULT NULL,
-  `idEtat` char(2) DEFAULT 'CR'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
 
 --
--- Structure de la table `forfait`
+-- Insert `Forfait`
 --
 
-CREATE TABLE IF NOT EXISTS `forfait` (
-  `id` char(3) NOT NULL,
-  `libelle` char(20) DEFAULT NULL,
-  `montant` decimal(5,2) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Contenu de la table `forfait`
---
-
-INSERT INTO `forfait` (`id`, `libelle`, `montant`) VALUES
+INSERT INTO `Forfait` (`id`, `libelle`, `montant`) VALUES
 ('ETP', 'Forfait Etape', '110.00'),
 ('KM', 'Frais Kilométrique', '0.62'),
 ('REP', 'Repas Restaurant', '25.00'),
 ('NUI', 'Nuitée Hôtel', '80.00');
-
--- --------------------------------------------------------
-
---
--- Structure de la table `lignefraisforfait`
---
-
-CREATE TABLE IF NOT EXISTS `lignefraisforfait` (
-  `idFicheFrais` int(11) NOT NULL,
-  `idForfait` char(3) NOT NULL,
-  `quantite` int(11) DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `visiteur`
---
-
-CREATE TABLE IF NOT EXISTS `visiteur` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `nom` char(30) NOT NULL,
-  `prenom` char(30) NOT NULL,
-  `adresse` char(30) DEFAULT NULL,
-  `cp` char(5) DEFAULT NULL,
-  `ville` char(30) DEFAULT NULL,
-  `dateEmbauche` date DEFAULT NULL,
-  `login` char(60) NOT NULL,
-  `pwd` char(32) NOT NULL,
-  PRIMARY KEY(`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Index pour les tables exportées
---
-
---
--- Index pour la table `etat`
---
-ALTER TABLE `etat`
- ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `fichefrais`
---
-ALTER TABLE `fichefrais`
- ADD PRIMARY KEY (`id`), ADD KEY `idEtat` (`idEtat`), ADD KEY `idVisiteur` (`idVisiteur`);
-
---
--- Index pour la table `forfait`
---
-ALTER TABLE `forfait`
- ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `lignefraisforfait`
---
-ALTER TABLE `lignefraisforfait`
- ADD PRIMARY KEY (`idFicheFrais`,`idForfait`), ADD KEY `idForfait` (`idForfait`);
-
---
--- AUTO_INCREMENT pour les tables exportées
---
-
---
--- AUTO_INCREMENT pour la table `fichefrais`
---
-ALTER TABLE `fichefrais`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- Contraintes pour les tables exportées
---
-
---
--- Contraintes pour la table `fichefrais`
---
-ALTER TABLE `fichefrais`
-ADD CONSTRAINT `fichefrais_ibfk_1` FOREIGN KEY (`idEtat`) REFERENCES `etat` (`id`) ON UPDATE CASCADE ON DELETE CASCADE,
-ADD CONSTRAINT `fichefrais_ibfk_2` FOREIGN KEY (`idVisiteur`) REFERENCES `visiteur` (`id`) ON UPDATE CASCADE ON DELETE CASCADE;
-
---
--- Contraintes pour la table `lignefraisforfait`
---
-ALTER TABLE `lignefraisforfait`
-ADD CONSTRAINT `lignefraisforfait_ibfk_1` FOREIGN KEY (`idFicheFrais`) REFERENCES `fichefrais` (`id`) ON UPDATE CASCADE ON DELETE CASCADE,
-ADD CONSTRAINT `lignefraisforfait_ibfk_2` FOREIGN KEY (`idForfait`) REFERENCES `forfait` (`id`) ON UPDATE CASCADE ON DELETE CASCADE;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
-
-
-INSERT INTO visiteur(nom, prenom, login, pwd, DateEmbauche) VALUES('comptable', 'comptable', 'comptable', md5('comptable'), NOW());
-INSERT INTO visiteur(nom, prenom, login, pwd, DateEmbauche) VALUES('admin', 'admin', 'admin', md5('admin'), NOW());

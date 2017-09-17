@@ -12,7 +12,7 @@
 		<link rel="stylesheet" type="text/css" href="styles/default.css" />
 		<link rel="stylesheet" type="text/css" href="styles/flashs.css" />
 
-		<script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+		<script src="js/jquery-3.2.1.min.js"></script>
 		<script src="js/flashClick.js"></script>
 
 		<meta name="robots" content="noindex, nofollow" />

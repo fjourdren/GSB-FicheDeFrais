@@ -114,6 +114,9 @@ foreach ($listeForfait as $key => $forfait) {
 			
 		<br />
 		
+		<!-- js pour ajouter les inputs hors forfait dynamiquement -->
+		<script src="js/horsForfait.js"></script>
+		
 		<table class="align">
 			<tr>
 				<td colspan="2"><h3>Hors forfaits</h3></td>
@@ -132,10 +135,7 @@ foreach ($listeForfait as $key => $forfait) {
 			</tr>
 		
 		</table>
-		
-		<!-- js pour ajouter les inputs hors forfait dynamiquement -->
-		<script src="js/horsForfait.js"></script>
-		
+
 		<br />
 		
 		<table class="align">
