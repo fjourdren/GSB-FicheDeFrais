@@ -62,7 +62,7 @@ if(count($fichesfraisList) != 0) {
 				<th>Nombre de justificatif</th>
 				<th>Montant</th>
 				<th>Etat</th>
-				<th>Modifier</th>
+				<th>Modifier / Afficher</th>
 				<th>Supprimer</th>
 			</tr>
 		</thead>
@@ -85,7 +85,9 @@ if(count($fichesfraisList) != 0) {
 										<img class="icone" src="images/icones/edit.png" alt="modifier"/>
 									</a>';
 							} else {
-								echo 'L\'etat de la fiche ne permet pas la modification.';
+								echo '<a href="visiteur-afficherFicheFrais.php?id='.secureDataAAfficher($fiche['id']).'">
+										<img class="icone" src="images/icones/show.png" alt="modifier"/>
+									</a>';
 							}
 						echo '</td>';
 						

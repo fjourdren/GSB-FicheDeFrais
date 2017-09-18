@@ -221,7 +221,40 @@ include 'layouts/flash.inc.php';
 		
 
 ?>
+
+			<table border="1">
+			<thead>
+				<tr>
+					<td class="tdTableGauche" colspan="2"><h3>Information Fiche de frais</h3></td>
+				</tr>
+			</thead>
+		
+			<tbody>
 			
+				<tr>
+					<td class="tdTableGauche">&#201;tat</td>
+					<?php
+						echo '<td>'.secureDataAAfficher($fiche['etatLibelle']).'</td>';
+					?>
+				</tr>
+
+				<tr>
+					<td class="tdTableGauche">Montant</td>
+					<?php
+						echo '<td>'.secureDataAAfficher($fiche['montantValide']).'&euro;</td>';
+					?>
+				</tr>
+
+				<tr>
+	                <td class="tdTableGauche"><label for="nbJustificatifs">Nombre justificatif :</label></td>
+	                <td><?php echo secureDataAAfficher($fiche['nbJustificatifs']);?></td>
+	            </tr>
+
+			</tbody>
+		</table>
+
+			<br />
+
 			<table border="1">
 			
 				<thead>
@@ -240,12 +273,6 @@ include 'layouts/flash.inc.php';
 								<td>Quantit&#233;: '.secureDataAAfficher($ligne['quantite']).' <br/>(Total: '.secureDataAAfficher($ligne['quantite']*$ligne['montant']).'&euro;)</td>
 							</tr>';
 						}
-						
-
-						echo '<tr>
-							<td class="tdTableGauche">Etat de la fiche de frais</td>
-							<td>'.secureDataAAfficher($fiche['etatLibelle']).'</td>
-						</tr>';
 
 					?>
 						
@@ -272,9 +299,6 @@ include 'layouts/flash.inc.php';
 								<td>Quantit&#233;: '.secureDataAAfficher($ligne['quantite']).' <br/>(Total: '.secureDataAAfficher($ligne['quantite']*$ligne['montant']).'&euro;)</td>
 							</tr>';
 						}
-						
-
-						
 
 					?>
 						
@@ -286,18 +310,12 @@ include 'layouts/flash.inc.php';
 			<table border="1">
 				<thead>
 					<tr>
-						<td class="tdTableGauche" colspan="2"><h3>&#201;tat</h3></td>
+						<td class="tdTableGauche" colspan="2"><h3>Changement d'&#233;tat</h3></td>
 					</tr>
 				</thead>
 			
 				<tbody>
-				
-					<tr>
-						<?php
-							echo '<td>'.secureDataAAfficher($fiche['etatLibelle']).'</td>';
-						?>
-					</tr>
-				
+
 					<tr>
 						<td>
 	

@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS `Visiteur` (
 -- Structure de la table `FicheFrais`
 --
 
-CREATE TABLE IF NOT EXISTS `Fichefrais` (
+CREATE TABLE IF NOT EXISTS `FicheFrais` (
   `id` int(11) UNSIGNED auto_increment,
   `idVisiteur` int UNSIGNED NOT NULL,
   `mois` tinyint UNSIGNED NOT NULL,

@@ -21,13 +21,28 @@ $idVisiteur = secureVariable($_SESSION['idVisiteur']);
 
 //récupération de la fiche de frais
 $sql        = "SELECT * FROM fichefrais 
-				WHERE id='$id'";
+				WHERE id='$id'
+				LIMIT 1";
 $fichefrais = tableSQL($sql)[0];
+
+
+
+
+
+//récupération du libelle de l'état
+$idEtat = $fichefrais['idEtat'];
+
+$sql = "SELECT libelle FROM etat 
+		WHERE id = '$idEtat' 
+		LIMIT 1";
+$fichefrais['etatLibelle'] = champSQL($sql);
+
+
 
 
 //vérification de l'identité de l'éditeur
 if($idVisiteur != $fichefrais['idVisiteur']) {
-	addFlash('Erreur', 'vous n\' 	&#234;tes pas le propri&#233;taire de cette fiche de frais');
+	addFlash('Erreur', 'vous n\'&#234;tes pas le propri&#233;taire de cette fiche de frais');
 	header('location: visiteur-listeFicheFrais.php');
 	exit;
 }
@@ -88,27 +103,84 @@ foreach ($listeForfait as $key => $forfait) {
 
 	<fieldset>
 	
-		<legend>Modifier fiche de frais</legend>			
+		<legend>Modifier fiche de frais</legend>
+		
+
+		<table border="1">
+			<thead>
+				<tr>
+					<td class="tdTableGauche" colspan="2"><h3>Information Fiche de frais</h3></td>
+				</tr>
+			</thead>
+		
+			<tbody>
 			
+				<tr>
+					<td class="tdTableGauche">&#201;tat</td>
+					<?php
+						echo '<td>'.secureDataAAfficher($fichefrais['etatLibelle']).'</td>';
+					?>
+				</tr>
+
+				<tr>
+					<td class="tdTableGauche">Montant</td>
+					<?php
+						echo '<td>'.secureDataAAfficher($fichefrais['montantValide']).'&euro;</td>';
+					?>
+				</tr>
+
+				<tr>
+					<td class="tdTableGauche">Mois</td>
+					<?php
+						echo '<td>'.secureDataAAfficher($fichefrais['mois']).'</td>';
+					?>
+				</tr>
+
+				<tr>
+					<td class="tdTableGauche">Année</td>
+					<?php
+						echo '<td>'.secureDataAAfficher($fichefrais['annee']).'</td>';
+					?>
+				</tr>
+
+				<tr>
+	                <td class="tdTableGauche"><label for="nbJustificatifs">Nombre justificatif :</label></td>
+	                <td><input id="nbJustificatifs" name="nbJustificatifs" type="number" min="0" value="<?php echo secureDataAAfficher($fichefrais['nbJustificatifs']);?>" size="5" /></td>
+	            </tr>
+
+			</tbody>
+		</table>
+
+		<br />
+
 		<table class="align">
+			<thead>
+				<tr>
+					<td colspan="2" class="tdTableGauche"><h3>Forfaits</h3></td>
+				</tr>
+			</thead>
+			
+			<tbody>
 			
 			<?php
 				foreach ($tableauForfaitAAfficher as $key => $forfaitFicheFrais) {
 					?>
 
 						<tr>
-							<td colspan="2"><label for="<?php echo secureDataAAfficher($forfaitFicheFrais['id']);?>"><?php echo secureDataAAfficher($forfaitFicheFrais['libelle']);?>: </label></td>
-			               	<td colspan="2"><input id="<?php echo secureDataAAfficher($forfaitFicheFrais['id']);?>" name="<?php echo secureDataAAfficher($forfaitFicheFrais['id']);?>" type="number" min="0" value="<?php echo secureDataAAfficher($forfaitFicheFrais['quantite']);?>" /></td>
+							<td class="tdTableGauche">
+								<label for="<?php echo secureDataAAfficher($forfaitFicheFrais['id']);?>"><?php echo secureDataAAfficher($forfaitFicheFrais['libelle']);?>: </label>
+							</td>
+			               	
+			               	<td>
+			               		<input id="<?php echo secureDataAAfficher($forfaitFicheFrais['id']);?>" name="<?php echo secureDataAAfficher($forfaitFicheFrais['id']);?>" type="number" min="0" value="<?php echo secureDataAAfficher($forfaitFicheFrais['quantite']);?>" />
+			               	</td>
 			            </tr>
 
 					<?php
 				}
 			?>
 
-            <tr>
-                <td colspan="2"><label for="nbJustificatifs">Nombre justificatif :</label></td>
-                <td colspan="2"><input id="nbJustificatifs" name="nbJustificatifs" type="number" min="0" value="<?php echo secureDataAAfficher($fichefrais['nbJustificatifs']);?>" size="5" /></td>
-            </tr>
+			</tbody>
 
 		</table>
 			
@@ -118,21 +190,25 @@ foreach ($listeForfait as $key => $forfait) {
 		<script src="js/horsForfait.js"></script>
 		
 		<table class="align">
-			<tr>
-				<td colspan="2"><h3>Hors forfaits</h3></td>
-			</tr>
-		
-			<tr>
-				<input id="horsForfaitNumber" name="horsForfaitNumber" type="hidden" value="0" />
-				<td><div id="horsForfaitContainer"></div></td>
-			</tr>
+			<thead>
+				<tr>
+					<td class="tdTableGauche"><h3>Hors forfaits</h3></td>
+				</tr>
+			</thead>
 			
-			<tr>
-				<td colspan="2">
-					<img class="icone" onclick="ajouter_horsForfait()" src="images/icones/add.png" alt="R&#233;initialiser">
-		  			<img class="icone" onclick="retirer_horsForfait()" src="images/icones/remove.png" alt="R&#233;initialiser">
-		  		</td>
-			</tr>
+			<tbody>
+				<tr>
+					<input id="horsForfaitNumber" name="horsForfaitNumber" type="hidden" value="0" />
+					<td><div id="horsForfaitContainer"></div></td>
+				</tr>
+				
+				<tr>
+					<td colspan="2">
+						<img class="icone" onclick="ajouter_horsForfait()" src="images/icones/add.png" alt="R&#233;initialiser">
+			  			<img class="icone" onclick="retirer_horsForfait()" src="images/icones/remove.png" alt="R&#233;initialiser">
+			  		</td>
+				</tr>
+			</tbody>
 		
 		</table>
 
@@ -140,7 +216,11 @@ foreach ($listeForfait as $key => $forfait) {
 		
 		<table class="align">
 			<tr>
-				<td colspan="4"><button class="icone" title="R&#233;initialiser" type="reset"><img src="images/icones/reset.png" alt="R&#233;initialiser"></button><input class="icone" type="image" src="images/icones/save.png" title="Ajouter la fiche de frais" alt="Ajouter la fiche de frais" /></td>
+				<td class="tdTableGauche"><h3>Sauvegarde</h3></td>
+			</tr>
+
+			<tr>
+				<td><button class="icone" title="R&#233;initialiser" type="reset"><img src="images/icones/reset.png" alt="R&#233;initialiser"></button><input class="icone" type="image" src="images/icones/save.png" title="Ajouter la fiche de frais" alt="Ajouter la fiche de frais" /></td>
 			</tr>
 		</table>
 

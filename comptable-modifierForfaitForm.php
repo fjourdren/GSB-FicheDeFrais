@@ -62,7 +62,7 @@ if($forfait == null) {
 			
 			<tr>
 				<td><label for="montant">Montant* :</label></td>
-				<td><input type="number" name="montant" min="0" value="0" value="<?php echo secureDataAAfficher($forfait[2]); ?>" step="any" /></td>
+				<td><input type="number" name="montant" min="0" value="<?php echo secureDataAAfficher($forfait[2]); ?>" step="any" /></td>
 			</tr>
 		
 			<tr>
