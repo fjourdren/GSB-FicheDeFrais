@@ -124,14 +124,16 @@ foreach ($listeForfaits as $key => $forfait) {
 $maxHorsForfait = $_POST['horsForfaitNumber'];
 for($i = 1; $i <= $maxHorsForfait; $i ++) {
 	
-	$libelleHorsForfait= secureVariable($_POST["horsForfait".$i."Libelle"]);
+	$libelleHorsForfait  = secureVariable($_POST["horsForfait".$i."Libelle"]);
 	$quantiteHorsForfait = secureVariable($_POST["horsForfait".$i."Quantite"]);
-	$montantHorsForfait = secureVariable($_POST["horsForfait".$i."Montant"]);
+	$montantHorsForfait  = secureVariable($_POST["horsForfait".$i."Montant"]);
 	
-	if(($montantHorsForfait< 0)
-	|| (!is_numeric($montantHorsForfait))) {
-		addFlash('Erreur', 'Les valeurs de hors forfait doivent &#234;tre des nombres positifs.');
+	if($montantHorsForfait < 0
+	|| !is_numeric($montantHorsForfait)
+	|| !$libelleHorsForfait) {
+		addFlash('Erreur', 'Les valeurs de hors forfaits ne sont pas valides.');
 		header('location: visiteur-ajouterForm.php');
+		exit;
 	}
 			
 	//insert

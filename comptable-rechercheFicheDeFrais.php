@@ -216,42 +216,42 @@ include 'layouts/flash.inc.php';
 		$horsForfaitsResult = tableSQL($sql);
 
 		foreach ($horsForfaitsResult as $key => $horsForfaitItem) {
-		$fiche['lignesFraisHorsForfait'][] = array("libelle" => $horsForfaitItem['libFraisHF'], "quantite" => $horsForfaitItem['quantite'], "montant" => $horsForfaitItem['montant']);
+		$fiche['lignesFraisHorsForfait'][] = array("libFraisHF" => $horsForfaitItem['libFraisHF'], "quantite" => $horsForfaitItem['quantite'], "montant" => $horsForfaitItem['montant']);
 		}
 		
 
 ?>
 
 			<table border="1">
-			<thead>
-				<tr>
-					<td class="tdTableGauche" colspan="2"><h3>Information Fiche de frais</h3></td>
-				</tr>
-			</thead>
-		
-			<tbody>
+				<thead>
+					<tr>
+						<td class="tdTableGauche" colspan="2"><h3>Informations Fiche de frais</h3></td>
+					</tr>
+				</thead>
 			
-				<tr>
-					<td class="tdTableGauche">&#201;tat</td>
-					<?php
-						echo '<td>'.secureDataAAfficher($fiche['etatLibelle']).'</td>';
-					?>
-				</tr>
+				<tbody>
+				
+					<tr>
+						<td class="tdTableGauche">&#201;tat</td>
+						<?php
+							echo '<td>'.secureDataAAfficher($fiche['etatLibelle']).'</td>';
+						?>
+					</tr>
 
-				<tr>
-					<td class="tdTableGauche">Montant</td>
-					<?php
-						echo '<td>'.secureDataAAfficher($fiche['montantValide']).'&euro;</td>';
-					?>
-				</tr>
+					<tr>
+						<td class="tdTableGauche">Montant</td>
+						<?php
+							echo '<td>'.secureDataAAfficher($fiche['montantValide']).'&euro;</td>';
+						?>
+					</tr>
 
-				<tr>
-	                <td class="tdTableGauche"><label for="nbJustificatifs">Nombre justificatif :</label></td>
-	                <td><?php echo secureDataAAfficher($fiche['nbJustificatifs']);?></td>
-	            </tr>
+					<tr>
+		                <td class="tdTableGauche"><label for="nbJustificatifs">Nombre justificatif</label></td>
+		                <td><?php echo secureDataAAfficher($fiche['nbJustificatifs']);?></td>
+		            </tr>
 
-			</tbody>
-		</table>
+				</tbody>
+			</table>
 
 			<br />
 
@@ -295,7 +295,7 @@ include 'layouts/flash.inc.php';
 						//affichage du contenu
 						foreach ($fiche['lignesFraisHorsForfait'] as $ligne) {
 							echo '<tr>
-								<td class="tdTableGauche">'.secureDataAAfficher($ligne['libelle'])." <br/>(".secureDataAAfficher($ligne['montant']).'&euro;)</td>
+								<td class="tdTableGauche">'.secureDataAAfficher($ligne['libFraisHF'])." <br/>(".secureDataAAfficher($ligne['montant']).'&euro;)</td>
 								<td>Quantit&#233;: '.secureDataAAfficher($ligne['quantite']).' <br/>(Total: '.secureDataAAfficher($ligne['quantite']*$ligne['montant']).'&euro;)</td>
 							</tr>';
 						}

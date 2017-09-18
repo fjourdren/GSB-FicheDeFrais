@@ -25,113 +25,148 @@ include 'layouts/flash.inc.php';
 		<!-- Gestion du mois par rapport à l'année -->
 		<script src="js/formSelectMoisAnnee.js"></script>
 
-		<table class="align">
-			<tr>
-				<td><label for="mois">Mois (2 chiffres):</label></td>
-				<td>               		
-               		<select name="mois" id="mois">
-					<?php
+		<table border="1">
 
-						//géré par le javascript formSelectMoisAnnee.js
-					  	/*for($m = 1; $m <= 12; $m++) {
-               			?>
-               			
-               				<option 
-	               				<?php 
-	               					if ($m == date('m')) {
-	               						echo 'selected="selected"';
-	               					}
-	               				?>
-               				value="<?php echo $m; ?>"><?php echo $m; ?></option>
+			<thead>
+				<tr>
+					<td class="tdTableGauche" colspan="4"><h3>Informations Fiche de frais</h3></td>
+				</tr>
+			</thead>
 
-               			<?php 
-               			}*/
-               			?>
-					</select>
-               	</td>
-                	
-               	<td><label for="annee">Ann&#233;e (4 chiffres):</label></td>
-                <td>               		
-               		<select name="annee" id="annee">
-					  <?php
-					  
-					 $sql = "SELECT min(annee) FROM fichefrais LIMIT 1";
-					  
-					 $minAnnee = champSQL($sql);
-					  if($minAnnee == null)
-					  	$minAnnee = date("Y")-1;
-					  
-						for($Y = $minAnnee; $Y <= date("Y"); $Y++) {
-               			?>
+			<tbody>
+				<tr>
+					<td  class="tdTableGauche"><label for="mois">Mois :</label></td>
+					<td>               		
+	               		<select name="mois" id="mois">
+						<?php
 
-               				<option 
-	               				<?php 
-	               					if ($Y == date('Y')) {
-	               						echo 'selected="selected"';
-	               					}
-	               				?>
-               				value="<?php echo $Y; ?>"><?php echo $Y; ?></option>
+							//géré par le javascript formSelectMoisAnnee.js
+						  	/*for($m = 1; $m <= 12; $m++) {
+	               			?>
+	               			
+	               				<option 
+		               				<?php 
+		               					if ($m == date('m')) {
+		               						echo 'selected="selected"';
+		               					}
+		               				?>
+	               				value="<?php echo $m; ?>"><?php echo $m; ?></option>
 
-               			<?php 
-               			}
-               			?>
-					</select>
-               	</td>
-			</tr>
+	               			<?php 
+	               			}*/
+	               			?>
+						</select>
+	               	</td>
+	                	
+	               	<td  class="tdTableGauche"><label for="annee">Ann&#233;e :</label></td>
+	                <td>               		
+	               		<select name="annee" id="annee">
+						  <?php
+						  
+						 $sql = "SELECT min(annee) FROM fichefrais LIMIT 1";
+						  
+						 $minAnnee = champSQL($sql);
+						  if($minAnnee == null)
+						  	$minAnnee = date("Y")-1;
+						  
+							for($Y = $minAnnee; $Y <= date("Y"); $Y++) {
+	               			?>
 
-			<?php
-				$sql = "SELECT id, libelle FROM forfait";
-				$listeForfaits = tableSQL($sql);
+	               				<option 
+		               				<?php 
+		               					if ($Y == date('Y')) {
+		               						echo 'selected="selected"';
+		               					}
+		               				?>
+	               				value="<?php echo $Y; ?>"><?php echo $Y; ?></option>
 
-				foreach ($listeForfaits as $key => $forfait) {
-					?>
+	               			<?php 
+	               			}
+	               			?>
+						</select>
+	               	</td>
+				</tr>
 
-						<tr>
-							<td colspan="2"><label for="<?php echo secureDataAAfficher($forfait['id']);?>"><?php echo secureDataAAfficher($forfait['libelle']);?>: </label></td>
-			               	<td colspan="2"><input id="<?php echo secureDataAAfficher($forfait['id']);?>" name="<?php echo secureDataAAfficher($forfait['id']);?>" type="number" min="0" value="0" /></td>
-			            </tr>
+	            <tr>
+	                <td colspan="2" class="tdTableGauche"><label for="nbJustificatifs">Nombre justificatif :</label></td>
+	                <td colspan="2"><input id="nbJustificatifs" name="nbJustificatifs" type="number" min="0" value="0" size="5" /></td>
+	            </tr>
 
-					<?php
-				}
-			?>
-
-            <tr>
-                <td colspan="2"><label for="nbJustificatifs">Nombre justificatif :</label></td>
-                <td colspan="2"><input id="nbJustificatifs" name="nbJustificatifs" type="number" min="0" value="0" size="5" /></td>
-            </tr>
+            </tbody>
 				
 		</table>
 		
+		<br />
+
+		<table border="1">
+			
+			<thead>
+				<tr>
+					<td class="tdTableGauche" colspan="2"><h3>Forfaits</h3></td>
+				</tr>
+			</thead>
+		
+			<tbody>
+				<?php
+					$sql = "SELECT id, libelle FROM forfait";
+					$listeForfaits = tableSQL($sql);
+
+					foreach ($listeForfaits as $key => $forfait) {
+						?>
+
+							<tr>
+								<td class="tdTableGauche"><label for="<?php echo secureDataAAfficher($forfait['id']);?>"><?php echo secureDataAAfficher($forfait['libelle']);?> : </label></td>
+				               	<td><input id="<?php echo secureDataAAfficher($forfait['id']);?>" name="<?php echo secureDataAAfficher($forfait['id']);?>" type="number" min="0" value="0" /></td>
+				            </tr>
+
+						<?php
+					}
+				?>
+					
+			</tbody>
+		</table>
+
 		<br />
 		
 		<!-- js pour ajouter les inputs hors forfait dynamiquement -->
 		<script src="js/horsForfait.js"></script>
 
-		<table class="align">
-			<tr>
-				<td colspan="2"><h3>Hors forfaits</h3></td>
-			</tr>
-		
-			<tr>
-				<input id="horsForfaitNumber" name="horsForfaitNumber" type="hidden" value="0" />
-				<td><div id="horsForfaitContainer"></div></td>
-			</tr>
+		<table border="1">
+			<thead>
+				<tr>
+					<td class="tdTableGauche" colspan="2"><h3>Hors forfaits</h3></td>
+				</tr>
+			</thead>
 			
-			<tr>
-				<td colspan="2">
-					<img class="icone" onclick="ajouter_horsForfait()" src="images/icones/add.png" alt="R&#233;initialiser">
-		  			<img class="icone" onclick="retirer_horsForfait()" src="images/icones/remove.png" alt="R&#233;initialiser">
-		  		</td>
-			</tr>
-		
+			<tbody>
+				<tr>
+					<input id="horsForfaitNumber" name="horsForfaitNumber" type="hidden" value="0" />
+					<td><div id="horsForfaitContainer"></div></td>
+				</tr>
+				
+				<tr>
+					<td colspan="2">
+						<img class="icone" onclick="ajouter_horsForfait()" src="images/icones/add.png" alt="R&#233;initialiser">
+			  			<img class="icone" onclick="retirer_horsForfait()" src="images/icones/remove.png" alt="R&#233;initialiser">
+			  		</td>
+				</tr>
+			</tbody>
 		</table>
 		
 		<br />
 		
-		<table class="align">
-			<tr>
-				<td colspan="4"><button class="icone" title="R&#233;initialiser" type="reset"><img src="images/icones/reset.png" alt="R&#233;initialiser"></button><input class="icone" type="image" src="images/icones/save.png" title="Ajouter la fiche de frais" alt="Ajouter la fiche de frais" /></td>
-			</tr>
+		<table border="1">
+			<thead>
+				<tr>
+					<td class="tdTableGauche" colspan="2"><h3>Sauvegarde</h3></td>
+				</tr>
+			</thead>
+			
+			<tbody>
+				<tr>
+					<td colspan="4"><button class="icone" title="R&#233;initialiser" type="reset"><img src="images/icones/reset.png" alt="R&#233;initialiser"></button><input class="icone" type="image" src="images/icones/save.png" title="Ajouter la fiche de frais" alt="Ajouter la fiche de frais" /></td>
+				</tr>
+			</tbody>
 		</table>
 
 	</fieldset>

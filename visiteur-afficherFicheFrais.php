@@ -119,7 +119,7 @@ if($_GET['id'] == "") { 	//on vérifie que l'id de la fiche est renseigné
 		<table border="1">
 			<thead>
 				<tr>
-					<td class="tdTableGauche" colspan="2"><h3>Information Fiche de frais</h3></td>
+					<td class="tdTableGauche" colspan="2"><h3>Informations Fiche de frais</h3></td>
 				</tr>
 			</thead>
 		

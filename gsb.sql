@@ -90,7 +90,7 @@ CREATE TABLE IF NOT EXISTS `LigneFraisForfait` (
   PRIMARY KEY (`idFicheFrais`, `idForfait`)
 ) ENGINE=InnoDB;
 
-ALTER TABLE `LigneFraisForfait` ADD CONSTRAINT `LigneFraisForfait_FicheFrais` FOREIGN KEY (`idFicheFrais`) REFERENCES `Fichefrais`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `LigneFraisForfait` ADD CONSTRAINT `LigneFraisForfait_FicheFrais` FOREIGN KEY (`idFicheFrais`) REFERENCES `FicheFrais`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 ALTER TABLE `LigneFraisForfait` ADD CONSTRAINT `LigneFraisForfait_Forfait` FOREIGN KEY (`idForfait`) REFERENCES `Forfait`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- --------------------------------------------------------
@@ -109,7 +109,7 @@ CREATE TABLE IF NOT EXISTS `LigneFraisHorsForfait` (
   PRIMARY KEY (`idFraisHF`)
 ) ENGINE=InnoDB;
 
-ALTER TABLE `LigneFraisHorsForfait` ADD CONSTRAINT `LigneFraisHorsForfait_FicheFrais` FOREIGN KEY (`idFicheFrais`) REFERENCES `Fichefrais`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `LigneFraisHorsForfait` ADD CONSTRAINT `LigneFraisHorsForfait_FicheFrais` FOREIGN KEY (`idFicheFrais`) REFERENCES `FicheFrais`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- --------------------------------------------------------
 
