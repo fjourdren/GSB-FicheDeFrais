@@ -112,22 +112,41 @@ foreach ($lignesFiche As $ligne) {
 
 
 
+
+$sqlConcat = "INSERT INTO LigneFraisHorsForfait(idFicheFrais, dteFraisHF, libFraisHF, quantite, montant) VALUES ";
+
 $maxHorsForfait = $_POST['horsForfaitNumber'];
 for($i = 1; $i <= $maxHorsForfait; $i ++) {
 	
 	$libelleHorsForfait= $_POST["horsForfait".$i."Libelle"];
+	$quantiteHorsForfait = secureVariable($_POST["horsForfait".$i."Quantite"]);
 	$montantHorsForfait = $_POST["horsForfait".$i."Montant"];
 	
-	if(($montantHorsForfait< 0)
-			|| (!is_numeric($montantHorsForfait))) {
-				addFlash('Erreur', 'Les valeurs de hors forfait doivent &#234;tre des nombres positifs.');
-				header('location: visiteur-ajouterForm.php');
+	if($montantHorsForfait < 0
+			|| !is_numeric($montantHorsForfait)
+			|| !$libelleHorsForfait) {
+				addFlash('Erreur', 'Les valeurs de hors forfaits ne sont pas valides.');
+				header('location: visiteur-modifierForm.php?id=' + $id);
+				exit;
 			}
 			
 			//insert
+			if($i != $maxHorsForfait) {
+				$sqlConcat .= "('$idFiche', NOW(), '$libelleHorsForfait', '$quantiteHorsForfait', '$montantHorsForfait'),";
+			} else {
+				$sqlConcat .= "('$idFiche', NOW(), '$libelleHorsForfait', '$quantiteHorsForfait', '$montantHorsForfait');";
+			}
 			
-			$montant+= $montantHorsForfait;
+			$montant += $montantHorsForfait;
 }
+
+
+//supression des anciennes entrées hors forfait
+$sql = "DELETE FROM LigneFraisHorsForfait WHERE idFicheFrais = '$idFiche'";
+executeSQL($sql);
+
+
+executeSQL($sqlConcat); //exécute la commande sql concaténé
 
 
 

@@ -137,7 +137,7 @@ foreach ($listeForfait as $key => $forfait) {
 				</tr>
 
 				<tr>
-					<td class="tdTableGauche">AnnÃ©e</td>
+					<td class="tdTableGauche">Ann&#233;e</td>
 					<?php
 						echo '<td>'.secureDataAAfficher($fichefrais['annee']).'</td>';
 					?>
@@ -186,8 +186,23 @@ foreach ($listeForfait as $key => $forfait) {
 			
 		<br />
 		
+		<script type="text/javascript">
+
+			//mise dans un tableau des hors forfaits pour être envoyé au JS
+			<?php
+				$sql = "SELECT * FROM LigneFraisHorsForfait
+				WHERE idFicheFrais='$id'";
+				
+				$horsForfaits = tableSQL($sql);
+				
+				$horsForfaitArrayOutput = json_encode($horsForfaits);
+			?>
+		
+			var map_horsForfait = <?php echo $horsForfaitArrayOutput; ?>;
+		</script>
+		
 		<!-- js pour ajouter les inputs hors forfait dynamiquement -->
-		<script src="js/horsForfait.js"></script>
+		<script src="js/horsForfaitModify.js"></script>
 		
 		<table border="1">
 			<thead>
