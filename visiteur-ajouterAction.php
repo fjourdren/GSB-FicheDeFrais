@@ -88,6 +88,7 @@ $ficheFrais = tableSQL($sql);
 $idFicheFrais = secureVariable($ficheFrais[0]['id']);
 
 
+addFlash('Succ&#232;s', 'Fiche de frais cr&#233;&#233;e');
 
 
 //GESTION DES LIGNES
@@ -106,7 +107,7 @@ foreach ($listeForfaits as $key => $forfait) {
 
 		if(($valeurFormDuForfait < 0)
 			|| (!is_numeric($valeurFormDuForfait))) {
-			addFlash('Erreur', 'Les valeurs doivent être des nombres positifs.');
+			addFlash('Erreur', 'Les valeurs doivent être des nombres positifs');
 			header('location: visiteur-listeFicheFrais.php');
 		}
 
@@ -121,17 +122,19 @@ foreach ($listeForfaits as $key => $forfait) {
 }
 
 
-$maxHorsForfait = $_POST['horsForfaitNumber'];
-for($i = 1; $i <= $maxHorsForfait; $i ++) {
+$maxHorsForfait = secureVariable($_POST['horsForfaitNumber']);
+for($i = 0; $i < $maxHorsForfait; $i++) {
 	
 	$libelleHorsForfait  = secureVariable($_POST["horsForfait".$i."Libelle"]);
 	$quantiteHorsForfait = secureVariable($_POST["horsForfait".$i."Quantite"]);
 	$montantHorsForfait  = secureVariable($_POST["horsForfait".$i."Montant"]);
 	
 	if($montantHorsForfait < 0
-	|| !is_numeric($montantHorsForfait)
-	|| !$libelleHorsForfait) {
-		addFlash('Erreur', 'Les valeurs de hors forfaits ne sont pas valides.');
+		|| !is_numeric($montantHorsForfait)
+		|| $quantiteHorsForfait < 0
+		|| !is_numeric($quantiteHorsForfait)
+		|| !$libelleHorsForfait) {
+		addFlash('Erreur', 'Les valeurs de hors forfaits ne sont pas valides');
 		header('location: visiteur-ajouterForm.php');
 		exit;
 	}
@@ -154,7 +157,6 @@ executeSQL($sql);
 
 
 //mise en session du message flash
-addFlash('Succ&#232;s', 'Fiche de frais cr&#233;&#233;e');
 header('location: visiteur-ajouterForm.php');
 exit;
 

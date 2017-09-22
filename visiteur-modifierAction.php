@@ -66,7 +66,7 @@ foreach ($listeForfaits as $key => $forfait) {
 
 				if(($valeurFormDuForfait < 0)
 					|| (!is_numeric($valeurFormDuForfait))) {
-						addFlash('Erreur', 'Les valeurs doivent Ãªtre des nombres positifs.');
+						addFlash('Erreur', 'Les valeurs doivent Ãªtre des nombres positifs');
 						header('location: visiteur-listeFicheFrais.php');
 					}
 
@@ -89,9 +89,9 @@ foreach ($listeForfaits as $key => $forfait) {
 						executeSQL($sql);
 					} else {
 						$sql = "UPDATE lignefraisforfait
-						SET quantite='$valeurFormDuForfait' 
-						WHERE idFicheFrais='$idFiche' 
-						AND idForfait='$forfaitID'";
+								SET quantite='$valeurFormDuForfait' 
+								WHERE idFicheFrais='$idFiche' 
+								AND idForfait='$forfaitID'";
 						executeSQL($sql);
 					}
 						
@@ -115,15 +115,17 @@ foreach ($lignesFiche As $ligne) {
 
 $sqlConcat = "INSERT INTO LigneFraisHorsForfait(idFicheFrais, dteFraisHF, libFraisHF, quantite, montant) VALUES ";
 
-$maxHorsForfait = $_POST['horsForfaitNumber'];
-for($i = 1; $i <= $maxHorsForfait; $i ++) {
-	
-	$libelleHorsForfait= $_POST["horsForfait".$i."Libelle"];
+$maxHorsForfait = secureVariable($_POST['horsForfaitNumber']);
+for($i = 0; $i < $maxHorsForfait; $i++) {
+
+	$libelleHorsForfait  = secureVariable($_POST["horsForfait".$i."Libelle"]);
 	$quantiteHorsForfait = secureVariable($_POST["horsForfait".$i."Quantite"]);
-	$montantHorsForfait = $_POST["horsForfait".$i."Montant"];
-	
+	$montantHorsForfait  = secureVariable($_POST["horsForfait".$i."Montant"]);
+
 	if($montantHorsForfait < 0
 			|| !is_numeric($montantHorsForfait)
+			|| $quantiteHorsForfait < 0
+			|| !is_numeric($quantiteHorsForfait)
 			|| !$libelleHorsForfait) {
 				addFlash('Erreur', 'Les valeurs de hors forfaits ne sont pas valides.');
 				header('location: visiteur-modifierForm.php?id=' + $id);
@@ -131,13 +133,13 @@ for($i = 1; $i <= $maxHorsForfait; $i ++) {
 			}
 			
 			//insert
-			if($i != $maxHorsForfait) {
-				$sqlConcat .= "('$idFiche', NOW(), '$libelleHorsForfait', '$quantiteHorsForfait', '$montantHorsForfait'),";
+			if($i != $maxHorsForfait - 1) {
+				$sqlConcat .= "('$idFiche', NOW(), '$libelleHorsForfait', '$quantiteHorsForfait', '$montantHorsForfait'), ";
 			} else {
 				$sqlConcat .= "('$idFiche', NOW(), '$libelleHorsForfait', '$quantiteHorsForfait', '$montantHorsForfait');";
 			}
 			
-			$montant += $montantHorsForfait;
+			$montant += $montantHorsForfait * $quantiteHorsForfait;
 }
 
 
@@ -152,9 +154,9 @@ executeSQL($sqlConcat); //exécute la commande sql concaténé
 
 //upload le montant de la fiche de frais et le nombre de justificatif
 $sql = "UPDATE fichefrais
-SET montantValide='$montant',
-nbJustificatifs='$nbJustificatifs'
-WHERE id='$id'";
+		SET montantValide='$montant',
+		nbJustificatifs='$nbJustificatifs'
+		WHERE id='$id'";
 executeSQL($sql);
 
 

@@ -1,9 +1,9 @@
 function ajouter_horsForfait() {
-	let id = document.getElementsByClassName("horsForfaitInputDiv").length + 1;
-    $("#horsForfaitContainer").append(render_horsForfait(id));
+	let e = document.getElementsByClassName("horsForfaitInputDiv");
+    $("#horsForfaitContainer").append(render_horsForfait(e.length));
 	
 	let eHorsForfaitNumber = document.getElementById("horsForfaitNumber");
-	eHorsForfaitNumber.setAttribute("value", id);
+	eHorsForfaitNumber.setAttribute("value", e.length);
 }
 
 function retirer_horsForfait() {
@@ -13,7 +13,7 @@ function retirer_horsForfait() {
 		$("#horsForfaitContainer .horsForfaitInputDiv:last-child").remove();
 	
 	let eHorsForfaitNumber = document.getElementById("horsForfaitNumber");
-	eHorsForfaitNumber.setAttribute("value", "" + e.length);
+	eHorsForfaitNumber.setAttribute("value", e.length);
 }
 
 function render_horsForfait(num) {

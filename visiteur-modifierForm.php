@@ -138,9 +138,11 @@ foreach ($listeForfait as $key => $forfait) {
 
 				<tr>
 					<td class="tdTableGauche">Ann&#233;e</td>
-					<?php
-						echo '<td>'.secureDataAAfficher($fichefrais['annee']).'</td>';
-					?>
+					<td>
+						<?php
+							echo secureDataAAfficher($fichefrais['annee']);
+						?>
+					</td>
 				</tr>
 
 				<tr>
@@ -197,7 +199,6 @@ foreach ($listeForfait as $key => $forfait) {
 				
 				$horsForfaitArrayOutput = json_encode($horsForfaits);
 			?>
-		
 			var map_horsForfait = <?php echo $horsForfaitArrayOutput; ?>;
 		</script>
 		
