@@ -15,10 +15,9 @@ if($_SESSION['login'] != COMPTANAME) { 	//on vérifie que l'utilisateur a le dro
 
 // si le champ invisible de l'id est nulle, alors on renvoie une erreur et on redirige
 if($_POST['id'] == null) {
-	addFlash('Erreur', 'Erreur ID invisible.');
+	addFlash('Erreur', 'Erreur ID invisible');
 	header('location: comptable-listeForfait.php');
 	exit;
-	
 }
 
 
@@ -26,7 +25,7 @@ if($_POST['id'] == null) {
 if(($_POST['libelle'] == null)
 	|| ($_POST['montant'] == null)) {
 
-	addFlash('Erreur', 'Merci de remplir les champs obligatoires.');
+	addFlash('Erreur', 'Merci de remplir les champs obligatoires');
 	header('location: comptable-modifierForfaitForm.php?id='.$_POST['idAvant']);
 	exit;
 
@@ -41,7 +40,7 @@ $montant  = secureVariable($_POST['montant']);
 if((!is_numeric($montant))
 	|| ($montant < 0)) {
 		//mise en session du message flash et redirect
-		addFlash('Erreur', 'Le montant doit &#234;tre positif et doit &#234;tre num&#233;rique.');
+		addFlash('Erreur', 'Le montant doit &#234;tre positif et doit &#234;tre num&#233;rique');
 		header('location: comptable-modifierForfaitForm.php?id='.$_POST['idAvant']);
 		exit;
 }

@@ -22,13 +22,13 @@ if($_GET['id'] != "") {
 	$resultat = executeSQL($sql);
 	
 	if($resultat) {
-		addFlash('Succ&#232;s', 'Supression r&#233;ussi.');
+		addFlash('Succ&#232;s', 'Supression r&#233;ussi');
 	} else {
-		addFlash('Erreur', 'Echec de la supression.');
+		addFlash('Erreur', 'Echec de la supression');
 	}
 
 } else {
-	addFlash('Erreur', 'Aucun ID renseign&#233;.');
+	addFlash('Erreur', 'Aucun ID renseign&#233;');
 }
 
 

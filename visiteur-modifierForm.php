@@ -49,7 +49,7 @@ if($idVisiteur != $fichefrais['idVisiteur']) {
 
 
 //vérification de l'état de la fiche de frais
-if($fichefrais['idEtat']!="CR") {
+if($fichefrais['idEtat'] != "CR") {
 	addFlash('Erreur', 'La fiche de frais est d&#233;j&#224; clotur&#233;');
 	header('location: visiteur-listeFicheFrais.php');
 	exit;

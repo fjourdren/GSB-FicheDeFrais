@@ -119,6 +119,7 @@ $maxHorsForfait = secureVariable($_POST['horsForfaitNumber']);
 for($i = 0; $i < $maxHorsForfait; $i++) {
 
 	$libelleHorsForfait  = secureVariable($_POST["horsForfait".$i."Libelle"]);
+	$dateHorsForfait     = secureVariable($_POST["horsForfait".$i."Date"]);
 	$quantiteHorsForfait = secureVariable($_POST["horsForfait".$i."Quantite"]);
 	$montantHorsForfait  = secureVariable($_POST["horsForfait".$i."Montant"]);
 
@@ -127,16 +128,16 @@ for($i = 0; $i < $maxHorsForfait; $i++) {
 			|| $quantiteHorsForfait < 0
 			|| !is_numeric($quantiteHorsForfait)
 			|| !$libelleHorsForfait) {
-				addFlash('Erreur', 'Les valeurs de hors forfaits ne sont pas valides.');
+				addFlash('Erreur', 'Les valeurs de hors forfaits ne sont pas valides');
 				header('location: visiteur-modifierForm.php?id=' + $id);
 				exit;
 			}
 			
 			//insert
 			if($i != $maxHorsForfait - 1) {
-				$sqlConcat .= "('$idFiche', NOW(), '$libelleHorsForfait', '$quantiteHorsForfait', '$montantHorsForfait'), ";
+				$sqlConcat .= "('$idFiche', '$dateHorsForfait', '$libelleHorsForfait', '$quantiteHorsForfait', '$montantHorsForfait'), ";
 			} else {
-				$sqlConcat .= "('$idFiche', NOW(), '$libelleHorsForfait', '$quantiteHorsForfait', '$montantHorsForfait');";
+				$sqlConcat .= "('$idFiche', '$dateHorsForfait', '$libelleHorsForfait', '$quantiteHorsForfait', '$montantHorsForfait');";
 			}
 			
 			$montant += $montantHorsForfait * $quantiteHorsForfait;

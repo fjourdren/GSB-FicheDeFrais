@@ -15,53 +15,31 @@ if($_SESSION['login'] == "") { 	//on vérifie que le visiteur est bien connecté
 
 
 //GESTION DE LA FICHE
-$mois            = secureVariable($_POST["mois"]);
-$annee           = secureVariable($_POST["annee"]);
-
 $nbJustificatifs = secureVariable($_POST['nbJustificatifs']);
-
 $idVisiteur      = secureVariable($_SESSION['idVisiteur']);
 
 
-//vérification date
-if(!is_numeric($mois)
-		|| !is_numeric($annee)
-		|| ($mois < 0)
-		|| ($annee < 0)) {
-			addFlash('Erreur', 'Date invalide');
-			header('location: visiteur-listeFicheFrais.php');
-			exit;
-}
-		
 
 
-//vérifie si la date n'est pas dans le futur
-if(date('m') == $mois) {
-	if(date('j') < NUMERO_JOUR_DE_CLOTURE) {
-		$now            = new DateTime(date('Y').'-'.date('m')); //maintenant
-		$ficheFraisMois = new DateTime($annee.'-'.$mois); //date limite de saisie
-		$interval       = $now->diff($ficheFraisMois);
-		//si la date est dans le futur ou si la cloture du mois est déjà faites, la date est invalide
+//calcul du mois en cours
+$day   = date("j");
+$month = date("n");
+$year  = date("Y");
 
-		if(($interval->format('%R%') == "+") 
-			&& ($interval->format('%R%a') != "+0")) {
-			addFlash('Erreur', 'Cette date ci est invalide');
-			header('location: visiteur-ajouterForm.php');
-			exit;
-		}
-	} else {
-		addFlash('Erreur', 'La cloture des fiches de frais a d&#233;j&#224; &#233;t&#233; effectu&#233;.');
-		header('location: visiteur-ajouterForm.php');
-		exit;
+if($day >= NUMERO_JOUR_DE_CLOTURE) {
+	$month++;
+
+	if($month >= 12) {
+		$month -= 12;
+		$year++;
 	}
 }
 
 
-
 //vérifie si une fiche de frais n'est pas déjà créer pour ce mois ci
 $sql = "SELECT * FROM fichefrais 
-		WHERE mois='$mois' 
-		AND annee='$annee' 
+		WHERE mois='$month' 
+		AND annee='$year' 
 		AND idVisiteur='$idVisiteur'
 		LIMIT 1";
 if(compteSQL($sql) != 0) {
@@ -72,15 +50,15 @@ if(compteSQL($sql) != 0) {
 }
 
 $sql = "INSERT INTO fichefrais(idVisiteur, mois, annee, dateModif, idEtat, nbJustificatifs)
-		VALUES ('$idVisiteur', '$mois', '$annee', NOW(), 'CR', '$nbJustificatifs')";
+		VALUES ('$idVisiteur', '$month', '$year', NOW(), 'CR', '$nbJustificatifs')";
 
 executeSQL($sql);
 
 
 $sql = "SELECT * FROM fichefrais 
 		WHERE idVisiteur='$idVisiteur' 
-		AND mois='$mois' 
-		AND annee='$annee'
+		AND mois='$month' 
+		AND annee='$year'
 		LIMIT 1";
 $ficheFrais = tableSQL($sql);
 
@@ -122,10 +100,13 @@ foreach ($listeForfaits as $key => $forfait) {
 }
 
 
+$sqlConcat = "INSERT INTO LigneFraisHorsForfait(idFicheFrais, dteFraisHF, libFraisHF, quantite, montant) VALUES ";
+
 $maxHorsForfait = secureVariable($_POST['horsForfaitNumber']);
 for($i = 0; $i < $maxHorsForfait; $i++) {
 	
 	$libelleHorsForfait  = secureVariable($_POST["horsForfait".$i."Libelle"]);
+	$dateHorsForfait     = secureVariable($_POST["horsForfait".$i."Date"]);
 	$quantiteHorsForfait = secureVariable($_POST["horsForfait".$i."Quantite"]);
 	$montantHorsForfait  = secureVariable($_POST["horsForfait".$i."Montant"]);
 	
@@ -140,13 +121,16 @@ for($i = 0; $i < $maxHorsForfait; $i++) {
 	}
 			
 	//insert
-	$sql = "INSERT INTO LigneFraisHorsForfait(idFicheFrais, dteFraisHF, libFraisHF, quantite, montant) 
-			VALUES ('$idFicheFrais', NOW(), '$libelleHorsForfait', '$quantiteHorsForfait', '$montantHorsForfait')";
-	executeSQL($sql);
-
+	if($i != $maxHorsForfait - 1) {
+		$sqlConcat .= "('$idFicheFrais', '$dateHorsForfait', '$libelleHorsForfait', '$quantiteHorsForfait', '$montantHorsForfait'), ";
+	} else {
+		$sqlConcat .= "('$idFicheFrais', '$dateHorsForfait', '$libelleHorsForfait', '$quantiteHorsForfait', '$montantHorsForfait');";
+	}
 			
 	$montantFicheDeFrais += $montantHorsForfait * $quantiteHorsForfait;
 }
+
+executeSQL($sqlConcat);
 
 
 

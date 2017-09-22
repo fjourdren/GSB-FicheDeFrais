@@ -34,56 +34,38 @@ include 'layouts/flash.inc.php';
 			</thead>
 
 			<tbody>
+
+				<?php
+
+					//calcul du mois en cours
+					$day   = date("j");
+					$month = date("n");
+					$year  = date("Y");
+
+					if($day >= NUMERO_JOUR_DE_CLOTURE) {
+						$month++;
+
+						if($month >= 12) {
+							$month -= 12;
+							$year++;
+						}
+					}
+
+				?>
+
 				<tr>
 					<td  class="tdTableGauche"><label for="mois">Mois :</label></td>
 					<td>               		
-	               		<select name="mois" id="mois">
-						<?php
-
-							//géré par le javascript formSelectMoisAnnee.js
-						  	/*for($m = 1; $m <= 12; $m++) {
-	               			?>
-	               			
-	               				<option 
-		               				<?php 
-		               					if ($m == date('m')) {
-		               						echo 'selected="selected"';
-		               					}
-		               				?>
-	               				value="<?php echo $m; ?>"><?php echo $m; ?></option>
-
-	               			<?php 
-	               			}*/
-	               			?>
-						</select>
+	               		<?php
+	               			echo $month;
+	               		?>
 	               	</td>
-	                	
+
 	               	<td  class="tdTableGauche"><label for="annee">Ann&#233;e :</label></td>
 	                <td>               		
-	               		<select name="annee" id="annee">
-						  <?php
-						  
-						 $sql = "SELECT min(annee) FROM fichefrais LIMIT 1";
-						  
-						 $minAnnee = champSQL($sql);
-						  if($minAnnee == null)
-						  	$minAnnee = date("Y")-1;
-						  
-							for($Y = $minAnnee; $Y <= date("Y"); $Y++) {
-	               			?>
-
-	               				<option 
-		               				<?php 
-		               					if ($Y == date('Y')) {
-		               						echo 'selected="selected"';
-		               					}
-		               				?>
-	               				value="<?php echo $Y; ?>"><?php echo $Y; ?></option>
-
-	               			<?php 
-	               			}
-	               			?>
-						</select>
+	               		<?php
+	               			echo $year;
+	               		?>
 	               	</td>
 				</tr>
 

@@ -216,7 +216,7 @@ include 'layouts/flash.inc.php';
 		$horsForfaitsResult = tableSQL($sql);
 
 		foreach ($horsForfaitsResult as $key => $horsForfaitItem) {
-		$fiche['lignesFraisHorsForfait'][] = array("libFraisHF" => $horsForfaitItem['libFraisHF'], "quantite" => $horsForfaitItem['quantite'], "montant" => $horsForfaitItem['montant']);
+		$fiche['lignesFraisHorsForfait'][] = array("libFraisHF" => $horsForfaitItem['libFraisHF'], "dteFraisHF" => $horsForfaitItem['dteFraisHF'], "quantite" => $horsForfaitItem['quantite'], "montant" => $horsForfaitItem['montant']);
 		}
 		
 
@@ -285,7 +285,7 @@ include 'layouts/flash.inc.php';
 				
 				<thead>
 					<tr>
-						<td class="tdTableGauche" colspan="2"><h3>Hors forfaits</h3></td>
+						<td class="tdTableGauche" colspan="3"><h3>Hors forfaits</h3></td>
 					</tr>
 				</thead>
 			
@@ -297,6 +297,7 @@ include 'layouts/flash.inc.php';
 							echo '<tr>
 								<td class="tdTableGauche">'.secureDataAAfficher($ligne['libFraisHF'])." <br/>(".secureDataAAfficher($ligne['montant']).'&euro;)</td>
 								<td>Quantit&#233;: '.secureDataAAfficher($ligne['quantite']).' <br/>(Total: '.secureDataAAfficher($ligne['quantite']*$ligne['montant']).'&euro;)</td>
+								<td>Date: '.date("d/m/Y", strtotime(secureDataAAfficher($ligne['dteFraisHF']))).'</td>
 							</tr>';
 						}
 
