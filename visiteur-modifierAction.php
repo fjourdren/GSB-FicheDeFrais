@@ -116,7 +116,6 @@ foreach ($lignesFiche As $ligne) {
 $sqlConcat = "INSERT INTO LigneFraisHorsForfait(idFicheFrais, dteFraisHF, libFraisHF, quantite, montant) VALUES ";
 
 $maxHorsForfait = secureVariable($_POST['horsForfaitNumber']);
-$sansNomId = 1;
 for($i = 0; $i < $maxHorsForfait; $i++) {
 
 	$libelleHorsForfait  = secureVariable($_POST["horsForfait".$i."Libelle"]);
@@ -124,6 +123,7 @@ for($i = 0; $i < $maxHorsForfait; $i++) {
 	$quantiteHorsForfait = secureVariable($_POST["horsForfait".$i."Quantite"]);
 	$montantHorsForfait  = secureVariable($_POST["horsForfait".$i."Montant"]);
 
+	
 	//preparation de la variable date pour l'insert, si c'est null on met à NOW
 	if(!$dateHorsForfait) {
 		$dateHorsForfait = "NOW()";
@@ -131,30 +131,27 @@ for($i = 0; $i < $maxHorsForfait; $i++) {
 		$dateHorsForfait = "'".$dateHorsForfait."'";
 	}
 
+	//si il n'y a pas de libellé, on met une valeur par défaut
+	if(!$libelleHorsForfait) {
+		$libelleHorsForfait = "Sans nom";
+	}
+
 	if($montantHorsForfait < 0
-			|| !is_numeric($montantHorsForfait)
-			|| $quantiteHorsForfait < 0
-			|| !is_numeric($quantiteHorsForfait)) {
-				addFlash('Erreur', 'Les valeurs de hors forfaits ne sont pas valides');
-				header('location: visiteur-modifierForm.php?id=' + $id);
-				exit;
-			}
-			
-			if(!$libelleHorsForfait) {
-				$libelleHorsForfait = "Sans nom ".$sansNomId;
-				$sansNomId++;
-			}
-
-			//insert
-			if($i != $maxHorsForfait - 1) {
-				$sqlConcat .= "('$idFiche', $dateHorsForfait, '$libelleHorsForfait', '$quantiteHorsForfait', '$montantHorsForfait'), ";
-			} else {
-				$sqlConcat .= "('$idFiche', $dateHorsForfait, '$libelleHorsForfait', '$quantiteHorsForfait', '$montantHorsForfait');";
-			}
-			
-			$montant += $montantHorsForfait * $quantiteHorsForfait;
+		|| !is_numeric($montantHorsForfait)
+		|| $quantiteHorsForfait < 0
+		|| !is_numeric($quantiteHorsForfait)) {
+		addFlash('Erreur', 'Certaines valeurs de hors forfaits ne sont pas valides');
+	} else {
+		//insert
+		if($i != $maxHorsForfait - 1) {
+			$sqlConcat .= "('$idFiche', $dateHorsForfait, '$libelleHorsForfait', '$quantiteHorsForfait', '$montantHorsForfait'), ";
+		} else {
+			$sqlConcat .= "('$idFiche', $dateHorsForfait, '$libelleHorsForfait', '$quantiteHorsForfait', '$montantHorsForfait');";
+		}
+				
+		$montantFicheDeFrais += $montantHorsForfait * $quantiteHorsForfait;
+	}
 }
-
 
 //supression des anciennes entrées hors forfait
 $sql = "DELETE FROM LigneFraisHorsForfait WHERE idFicheFrais = '$idFiche'";
