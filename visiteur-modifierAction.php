@@ -149,7 +149,7 @@ for($i = 0; $i < $maxHorsForfait; $i++) {
 			$sqlConcat .= "('$idFiche', $dateHorsForfait, '$libelleHorsForfait', '$quantiteHorsForfait', '$montantHorsForfait');";
 		}
 				
-		$montantFicheDeFrais += $montantHorsForfait * $quantiteHorsForfait;
+		$montant += $montantHorsForfait * $quantiteHorsForfait;
 	}
 }
 
