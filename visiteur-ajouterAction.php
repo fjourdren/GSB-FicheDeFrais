@@ -103,6 +103,7 @@ foreach ($listeForfaits as $key => $forfait) {
 $sqlConcat = "INSERT INTO LigneFraisHorsForfait(idFicheFrais, dteFraisHF, libFraisHF, quantite, montant) VALUES ";
 
 $maxHorsForfait = secureVariable($_POST['horsForfaitNumber']);
+$sansNomId = 1;
 for($i = 0; $i < $maxHorsForfait; $i++) {
 	
 	$libelleHorsForfait  = secureVariable($_POST["horsForfait".$i."Libelle"]);
@@ -110,21 +111,32 @@ for($i = 0; $i < $maxHorsForfait; $i++) {
 	$quantiteHorsForfait = secureVariable($_POST["horsForfait".$i."Quantite"]);
 	$montantHorsForfait  = secureVariable($_POST["horsForfait".$i."Montant"]);
 	
+	//preparation de la variable date pour l'insert, si c'est null on met à NOW
+	if(!$dateHorsForfait) {
+		$dateHorsForfait = "NOW()";
+	} else {
+		$dateHorsForfait = "'".$dateHorsForfait."'";
+	}
+
 	if($montantHorsForfait < 0
 		|| !is_numeric($montantHorsForfait)
 		|| $quantiteHorsForfait < 0
-		|| !is_numeric($quantiteHorsForfait)
-		|| !$libelleHorsForfait) {
+		|| !is_numeric($quantiteHorsForfait)) {
 		addFlash('Erreur', 'Les valeurs de hors forfaits ne sont pas valides');
 		header('location: visiteur-ajouterForm.php');
 		exit;
 	}
+
+	if(!$libelleHorsForfait) {
+		$libelleHorsForfait = "Sans nom ".$sansNomId;
+		$sansNomId++;
+	}
 			
 	//insert
 	if($i != $maxHorsForfait - 1) {
-		$sqlConcat .= "('$idFicheFrais', '$dateHorsForfait', '$libelleHorsForfait', '$quantiteHorsForfait', '$montantHorsForfait'), ";
+		$sqlConcat .= "('$idFicheFrais', $dateHorsForfait, '$libelleHorsForfait', '$quantiteHorsForfait', '$montantHorsForfait'), ";
 	} else {
-		$sqlConcat .= "('$idFicheFrais', '$dateHorsForfait', '$libelleHorsForfait', '$quantiteHorsForfait', '$montantHorsForfait');";
+		$sqlConcat .= "('$idFicheFrais', $dateHorsForfait, '$libelleHorsForfait', '$quantiteHorsForfait', '$montantHorsForfait');";
 	}
 			
 	$montantFicheDeFrais += $montantHorsForfait * $quantiteHorsForfait;

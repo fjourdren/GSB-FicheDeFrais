@@ -59,7 +59,7 @@ if(count($fichesfraisList) != 0) {
 	
 	//affichage de la liste
 	?>
-	<table border="border">
+	<table>
 		<thead>
 			<tr>
 				<th>Visiteur</th>

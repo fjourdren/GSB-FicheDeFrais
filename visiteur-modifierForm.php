@@ -106,7 +106,7 @@ foreach ($listeForfait as $key => $forfait) {
 		<legend>Modifier fiche de frais</legend>
 		
 
-		<table border="1">
+		<table>
 			<thead>
 				<tr>
 					<td class="tdTableGauche" colspan="2"><h3>Informations Fiche de frais</h3></td>
@@ -146,7 +146,7 @@ foreach ($listeForfait as $key => $forfait) {
 				</tr>
 
 				<tr>
-	                <td class="tdTableGauche"><label for="nbJustificatifs">Nombre justificatif :</label></td>
+	                <td class="tdTableGauche"><label for="nbJustificatifs">Nombre justificatif* :</label></td>
 	                <td><input id="nbJustificatifs" name="nbJustificatifs" type="number" min="0" value="<?php echo secureDataAAfficher($fichefrais['nbJustificatifs']);?>" size="5" /></td>
 	            </tr>
 
@@ -155,7 +155,7 @@ foreach ($listeForfait as $key => $forfait) {
 
 		<br />
 
-		<table border="1">
+		<table>
 			<thead>
 				<tr>
 					<td colspan="2" class="tdTableGauche"><h3>Forfaits</h3></td>
@@ -205,7 +205,7 @@ foreach ($listeForfait as $key => $forfait) {
 		<!-- js pour ajouter les inputs hors forfait dynamiquement -->
 		<script src="js/horsForfaitModify.js"></script>
 		
-		<table border="1">
+		<table>
 			<thead>
 				<tr>
 					<td class="tdTableGauche"><h3>Hors forfaits</h3></td>
@@ -230,7 +230,7 @@ foreach ($listeForfait as $key => $forfait) {
 
 		<br />
 		
-		<table class="align">
+		<table>
 			<tr>
 				<td class="tdTableGauche"><h3>Sauvegarde</h3></td>
 			</tr>

@@ -36,7 +36,7 @@ $visiteur = tableSQL($sql)[0];
 	<fieldset>
 		<legend>Modifier le visiteur <i><?php echo secureDataAAfficher($visiteur['nom'])." ".secureDataAAfficher($visiteur['prenom'])." (".secureDataAAfficher($visiteur['login']).")"; ?></i></legend>
 		
-		<table class="align">			
+		<table>			
 			<tr>
 				<td><label for="nom">Nom* :</label></td>
 				<td><input type="text" name="nom" value="<?php echo secureDataAAfficher($visiteur['nom']); ?>" required /></td>

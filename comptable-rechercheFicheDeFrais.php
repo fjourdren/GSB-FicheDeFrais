@@ -24,7 +24,7 @@ include 'layouts/flash.inc.php';
 		
 	<legend>Consulter une fiche de frais</legend>
 
-		<table class="align">
+		<table>
 			<tr>
 				<td><label for="visiteurID">Visiteur :</label></td>
 		    	<td><select name="visiteurID">
@@ -222,7 +222,7 @@ include 'layouts/flash.inc.php';
 
 ?>
 
-			<table border="1">
+			<table>
 				<thead>
 					<tr>
 						<td class="tdTableGauche" colspan="2"><h3>Informations Fiche de frais</h3></td>
@@ -255,7 +255,7 @@ include 'layouts/flash.inc.php';
 
 			<br />
 
-			<table border="1">
+			<table>
 			
 				<thead>
 					<tr>
@@ -281,7 +281,7 @@ include 'layouts/flash.inc.php';
 			
 			<br />
 			
-			<table border="1">
+			<table>
 				
 				<thead>
 					<tr>
@@ -308,7 +308,7 @@ include 'layouts/flash.inc.php';
 			
 			<br>
 			
-			<table border="1">
+			<table>
 				<thead>
 					<tr>
 						<td class="tdTableGauche" colspan="2"><h3>Changement d'&#233;tat</h3></td>

@@ -15,14 +15,14 @@ include 'layouts/flash.inc.php';
 
 ?>
 
-<a href="admin-listeVisiteur.php" class="backButton" style="text-align: left; display: block;"><img class="icone" src="images/icones/back.png" alt="Retour"/></a>
+<a href="admin-listeVisiteur.php" class="backButton"><img class="icone" src="images/icones/back.png" alt="Retour"/></a>
 
 <form method="post" action="admin-ajouterVisiteurAction.php">
 
 	<fieldset>
 		<legend>Ajouter un visiteur</legend>
 		
-		<table class="align">
+		<table>
 			<tr>
 				<td><label for="nom">Nom* :</label></td>
 				<td><input type="text" name="nom" required /></td>

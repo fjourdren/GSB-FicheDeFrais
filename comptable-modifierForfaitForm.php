@@ -40,7 +40,7 @@ if($forfait == null) {
 
 ?>
 
-<a href="comptable-listeForfait.php" class="backButton" style="text-align: left; display: block;"><img class="icone" src="images/icones/back.png" alt="Retour"/></a>
+<a href="comptable-listeForfait.php" class="backButton"><img class="icone" src="images/icones/back.png" alt="Retour"/></a>
 
 <form method="post" action="comptable-modifierForfaitAction.php">
 

@@ -116,7 +116,7 @@ if($_GET['id'] == "") { 	//on vérifie que l'id de la fiche est renseigné
 
 ?>
 
-		<table border="1">
+		<table>
 			<thead>
 				<tr>
 					<td class="tdTableGauche" colspan="2"><h3>Informations Fiche de frais</h3></td>
@@ -163,7 +163,7 @@ if($_GET['id'] == "") { 	//on vérifie que l'id de la fiche est renseigné
 
 		<br />
 		
-		<table border="1">
+		<table>
 		
 			<thead>
 				<tr>
@@ -195,7 +195,7 @@ if($_GET['id'] == "") { 	//on vérifie que l'id de la fiche est renseigné
 		
 		<br />
 		
-		<table border="1">
+		<table>
 			
 			<thead>
 				<tr>

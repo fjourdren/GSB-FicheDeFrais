@@ -25,7 +25,7 @@ include 'layouts/flash.inc.php';
 		<!-- Gestion du mois par rapport à l'année -->
 		<script src="js/formSelectMoisAnnee.js"></script>
 
-		<table border="1">
+		<table>
 
 			<thead>
 				<tr>
@@ -70,7 +70,7 @@ include 'layouts/flash.inc.php';
 				</tr>
 
 	            <tr>
-	                <td colspan="2" class="tdTableGauche"><label for="nbJustificatifs">Nombre justificatif :</label></td>
+	                <td colspan="2" class="tdTableGauche"><label for="nbJustificatifs">Nombre justificatif* :</label></td>
 	                <td colspan="2"><input id="nbJustificatifs" name="nbJustificatifs" type="number" min="0" value="0" size="5" /></td>
 	            </tr>
 
@@ -80,7 +80,7 @@ include 'layouts/flash.inc.php';
 		
 		<br />
 
-		<table border="1">
+		<table>
 			
 			<thead>
 				<tr>
@@ -113,7 +113,7 @@ include 'layouts/flash.inc.php';
 		<!-- js pour ajouter les inputs hors forfait dynamiquement -->
 		<script src="js/horsForfait.js"></script>
 
-		<table border="1">
+		<table>
 			<thead>
 				<tr>
 					<td class="tdTableGauche" colspan="2"><h3>Hors forfaits</h3></td>
@@ -137,7 +137,7 @@ include 'layouts/flash.inc.php';
 		
 		<br />
 		
-		<table border="1">
+		<table>
 			<thead>
 				<tr>
 					<td class="tdTableGauche" colspan="2"><h3>Sauvegarde</h3></td>
