@@ -202,9 +202,6 @@ foreach ($listeForfait as $key => $forfait) {
 			var map_horsForfait = <?php echo $horsForfaitArrayOutput; ?>;
 		</script>
 		
-		<!-- js pour ajouter les inputs hors forfait dynamiquement -->
-		<script src="js/horsForfaitModify.js"></script>
-		
 		<table>
 			<thead>
 				<tr>
@@ -227,6 +224,14 @@ foreach ($listeForfait as $key => $forfait) {
 			</tbody>
 		
 		</table>
+
+		<!-- js pour ajouter les inputs hors forfait dynamiquement -->
+		<script src="js/horsForfait.js"></script>
+		<script type="text/javascript">
+			$(function () {
+				ajouter_liste_horsForfait();
+			});
+		</script>
 
 		<br />
 		

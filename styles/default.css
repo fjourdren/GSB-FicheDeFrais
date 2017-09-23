@@ -192,6 +192,14 @@ div.wrap div.content img.icone {
 	width: auto;
 }
 
+div.wrap div.content img.iconeMin {
+	height: 23px;
+	width: auto;
+	vertical-align:middle;
+	margin-left: 5px;
+	margin-bottom: 3px;
+}
+
 div.wrap div.content a.backButton {
 	text-align: left;
 	display: block;

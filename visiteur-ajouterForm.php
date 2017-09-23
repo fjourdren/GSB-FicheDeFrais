@@ -109,9 +109,6 @@ include 'layouts/flash.inc.php';
 		</table>
 
 		<br />
-		
-		<!-- js pour ajouter les inputs hors forfait dynamiquement -->
-		<script src="js/horsForfait.js"></script>
 
 		<table>
 			<thead>
@@ -122,7 +119,7 @@ include 'layouts/flash.inc.php';
 			
 			<tbody>
 				<tr>
-					<input id="horsForfaitNumber" name="horsForfaitNumber" type="hidden" value="0" />
+					<input id="horsForfaitNumber" name="horsForfaitNumber" type="text" value="0" />
 					<td><div id="horsForfaitContainer"></div></td>
 				</tr>
 				
@@ -134,6 +131,14 @@ include 'layouts/flash.inc.php';
 				</tr>
 			</tbody>
 		</table>
+
+		<!-- js pour ajouter les inputs hors forfait dynamiquement -->
+		<script src="js/horsForfait.js"></script>
+		<script type="text/javascript">
+			$(function () {
+				ajouter_horsForfait();
+			});
+		</script>
 		
 		<br />
 		
