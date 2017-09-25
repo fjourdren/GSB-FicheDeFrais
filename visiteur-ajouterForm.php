@@ -119,7 +119,7 @@ include 'layouts/flash.inc.php';
 			
 			<tbody>
 				<tr>
-					<input id="horsForfaitNumber" name="horsForfaitNumber" type="text" value="0" />
+					<input id="horsForfaitNumber" name="horsForfaitNumber" type="hidden" value="0" />
 					<td><div id="horsForfaitContainer"></div></td>
 				</tr>
 				
