@@ -1,12 +1,12 @@
 <?php
 @session_start();
 
-require_once 'include/config.inc.php'; //appelle fichier init pour les bariable constante à tout le site
+require_once 'include/config.inc.php'; //appelle fichier init pour les bariable constante Ã  tout le site
 require_once 'include/AccesDonneesInit.inc.php';
 require_once 'include/flash.lib.php';
 require_once 'include/database.lib.php';
 
-if($_SESSION['login'] != COMPTANAME) { 	//on vérifie que l'utilisateur a le droit d'être sur cette page
+if($_SESSION['login'] != COMPTANAME) { 	//on vÃ©rifie que l'utilisateur a le droit d'Ãªtre sur cette page
 	header('location: connexion.php');
 	exit;
 }
@@ -21,7 +21,7 @@ if($_POST['id'] == null) {
 }
 
 
-//on vérifie que les champs obligatoires sont présents.
+//on vÃ©rifie que les champs obligatoires sont prÃ©sents.
 if(($_POST['libelle'] == null)
 	|| ($_POST['montant'] == null)) {
 
@@ -36,7 +36,7 @@ if(($_POST['libelle'] == null)
 $id       = secureVariable($_POST['id']);
 $libelle  = secureVariable($_POST['libelle']);
 $montant  = secureVariable($_POST['montant']);
-//vérification que le montant est positif et valide
+//vÃ©rification que le montant est positif et valide
 if((!is_numeric($montant))
 	|| ($montant < 0)) {
 		//mise en session du message flash et redirect
@@ -55,15 +55,15 @@ $resultat = executeSQL($sql);
 
 
 
-//mise � jour du montant des fiches de frais qui contiennent le forfait
-$sql = "SELECT idFicheFrais, quantite FROM LigneFraisForfait WHERE idForfait='$id'"; //recherche des fiche dont le montant total sera � modifier
+//mise à jour du montant des fiches de frais qui contiennent le forfait
+$sql = "SELECT idFicheFrais, quantite FROM LigneFraisForfait WHERE idForfait='$id'"; //recherche des fiche dont le montant total sera à modifier
 $fichesAModifier = tableSQL($sql);
 
 foreach ($fichesAModifier as $fiche) {
-	$montantTotal = $montant * $fiche['quantite']; //calcul montant � supprimer
+	$montantTotal = $montant * $fiche['quantite']; //calcul montant à supprimer
 	$idFiche = $fiche['idFicheFrais'];
 	
-	$sql = "UPDATE FicheFrais SET montantValide='$montantTotal' WHERE id='$idFiche'"; //recherche des fiche dont le montant total sera � modifier
+	$sql = "UPDATE FicheFrais SET montantValide=montantValide-'$montantTotal' WHERE id='$idFiche'"; //recherche des fiche dont le montant total sera à modifier
 	executeSQL($sql);
 }
 
