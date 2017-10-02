@@ -53,6 +53,25 @@ $sql = "UPDATE forfait
 $resultat = executeSQL($sql);
 
 
+
+
+//mise à jour du montant des fiches de frais qui contiennent le forfait
+$sql = "SELECT idFicheFrais, quantite FROM LigneFraisForfait WHERE idForfait='$id'"; //recherche des fiche dont le montant total sera à modifier
+$fichesAModifier = tableSQL($sql);
+
+foreach ($fichesAModifier as $fiche) {
+	$montantTotal = $montant * $fiche['quantite']; //calcul montant à supprimer
+	$idFiche = $fiche['idFicheFrais'];
+	
+	$sql = "UPDATE FicheFrais SET montantValide='$montantTotal' WHERE id='$idFiche'"; //recherche des fiche dont le montant total sera à modifier
+	executeSQL($sql);
+}
+
+
+
+
+
+
 //mise en session du message flash puis redirection
 addFlash('Succ&#232;s', 'Forfait modifi&#233;');
 header('location: comptable-listeForfait.php');
