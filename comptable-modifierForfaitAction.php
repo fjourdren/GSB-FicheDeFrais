@@ -46,6 +46,12 @@ if((!is_numeric($montant))
 }
 
 
+
+//Select du vieux montant du forfait pour mettre à jour les fiches de frais
+$sql = "SELECT montant FROM forfait WHERE id='$id'";
+$oldMontant = champSQL($sql);
+
+
 $sql = "UPDATE forfait
 		SET libelle='$libelle', montant='$montant'  
 		WHERE id='$id'";
@@ -54,19 +60,18 @@ $resultat = executeSQL($sql);
 
 
 
-
 //mise à jour du montant des fiches de frais qui contiennent le forfait
 $sql = "SELECT idFicheFrais, quantite FROM LigneFraisForfait WHERE idForfait='$id'"; //recherche des fiche dont le montant total sera à modifier
 $fichesAModifier = tableSQL($sql);
 
 foreach ($fichesAModifier as $fiche) {
-	$montantTotal = $montant * $fiche['quantite']; //calcul montant à supprimer
-	$idFiche = $fiche['idFicheFrais'];
-	
-	$sql = "UPDATE FicheFrais SET montantValide=montantValide-'$montantTotal' WHERE id='$idFiche'"; //recherche des fiche dont le montant total sera à modifier
+	$montantTotal    = $oldMontant * $fiche['quantite']; //calcul montant à supprimer
+	$newValueForfait = $montant * $fiche['quantite'];
+	$idFiche         = $fiche['idFicheFrais'];
+
+	$sql = "UPDATE FicheFrais SET montantValide=(montantValide-'$montantTotal') + '$newValueForfait' WHERE id='$idFiche'"; //recherche des fiche dont le montant total sera à modifier
 	executeSQL($sql);
 }
-
 
 
 
