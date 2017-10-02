@@ -33,7 +33,7 @@ if(($_POST['libelle'] == null)
 
 
 
-$id  = secureVariable($_POST['id']);
+$id       = secureVariable($_POST['id']);
 $libelle  = secureVariable($_POST['libelle']);
 $montant  = secureVariable($_POST['montant']);
 //vérification que le montant est positif et valide
