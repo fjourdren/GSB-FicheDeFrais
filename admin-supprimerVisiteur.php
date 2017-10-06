@@ -17,7 +17,7 @@ if($_GET['id'] != "") {
 	$id = secureVariable($_GET['id']);
 
 	//requete sql qui rÃƒÂ©cupÃƒÂ¨re tous les visiteurs
-	$sql = "DELETE FROM visiteur 
+	$sql = "DELETE FROM Visiteur 
 			WHERE id='$id'";
 	$resultat = executeSQL($sql);
 	

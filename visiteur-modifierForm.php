@@ -20,7 +20,7 @@ $idVisiteur = secureVariable($_SESSION['idVisiteur']);
 
 
 //récupération de la fiche de frais
-$sql        = "SELECT * FROM fichefrais 
+$sql        = "SELECT * FROM FicheFrais 
 				WHERE id='$id'
 				LIMIT 1";
 $fichefrais = tableSQL($sql)[0];
@@ -32,7 +32,7 @@ $fichefrais = tableSQL($sql)[0];
 //récupération du libelle de l'état
 $idEtat = $fichefrais['idEtat'];
 
-$sql = "SELECT libelle FROM etat 
+$sql = "SELECT libelle FROM Etat 
 		WHERE id = '$idEtat' 
 		LIMIT 1";
 $fichefrais['etatLibelle'] = champSQL($sql);
@@ -58,12 +58,12 @@ if($fichefrais['idEtat'] != "CR") {
 
 
 //on met toutes les valeurs des forfaits de la fiche dans un tableau unique
-$sql = "SELECT id, libelle FROM forfait";
+$sql = "SELECT id, libelle FROM Forfait";
 $listeForfait = tableSQL($sql);
 
 
 
-$sql = "SELECT idForfait, quantite FROM lignefraisforfait 
+$sql = "SELECT idForfait, quantite FROM LigneFraisForfait 
 		WHERE idFicheFrais='$id'";
 $listeLignes = tableSQL($sql);
 

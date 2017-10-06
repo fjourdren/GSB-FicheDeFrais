@@ -27,7 +27,7 @@ $etat         = secureVariable($_GET['etat']);
 
 
 //on récupère la fiche de frais
-$sql = "SELECT * FROM fichefrais WHERE id='$idFicheFrais'";
+$sql = "SELECT * FROM FicheFrais WHERE id='$idFicheFrais'";
 $fichefrais = tableSQL($sql)[0];
 
 
@@ -44,7 +44,7 @@ switch($fichefrais['idEtat']) {
 	case "CL":
 			if($etat == "VA") {
 				//update dans la base de donnée
-				$sql = "UPDATE fichefrais SET idEtat='$etat' WHERE id='$idFicheFrais'";
+				$sql = "UPDATE FicheFrais SET idEtat='$etat' WHERE id='$idFicheFrais'";
 				executeSQL($sql);
 
 				addflash('Succ&#232;s', 'Etat de la fiche de frais modifi&#233;.');
@@ -59,7 +59,7 @@ switch($fichefrais['idEtat']) {
 	case "VA":
 			if($etat == "RB") {
 				//update dans la base de donnée
-				$sql = "UPDATE fichefrais 
+				$sql = "UPDATE FicheFrais 
 						SET idEtat='$etat' 
 						WHERE id='$idFicheFrais'";
 				executeSQL($sql);

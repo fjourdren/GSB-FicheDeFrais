@@ -17,7 +17,7 @@ $idVisiteur = secureVariable($_SESSION['idVisiteur']);
 
 
 //récupération de la fiche de frais
-$sql        = "SELECT * FROM fichefrais 
+$sql        = "SELECT * FROM FicheFrais 
 				WHERE id='$id'";
 $fichefrais = tableSQL($sql)[0];
 
@@ -39,7 +39,7 @@ if($fichefrais['idEtat'] != "CR") {
 
 
 
-$sql = "DELETE FROM fichefrais 
+$sql = "DELETE FROM FicheFrais 
 		WHERE id='$id'";
 executeSQL($sql);
 

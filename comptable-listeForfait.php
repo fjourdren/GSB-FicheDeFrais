@@ -37,7 +37,7 @@ include 'layouts/flash.inc.php';
 	<?php
 
 
-		$sql = "SELECT * FROM forfait";			//requete sql qui récupère tous les forfaits
+		$sql = "SELECT * FROM Forfait";			//requete sql qui récupère tous les forfaits
 		
 		$forfaits = tableSQL($sql);								//execute la requete
 				

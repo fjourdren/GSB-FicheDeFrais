@@ -20,7 +20,7 @@ if($_GET['id'] == "") {
 }
 
 $id = secureVariable($_GET['id']);
-$sql = "SELECT * FROM visiteur 
+$sql = "SELECT * FROM Visiteur 
 		WHERE id='$id'";
 
 $visiteur = tableSQL($sql)[0];

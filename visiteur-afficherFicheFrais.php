@@ -30,7 +30,7 @@ if($_GET['id'] == "") { 	//on vérifie que l'id de la fiche est renseigné
 	
 
 	//récupération des infos dans la base de donnée	
-	$sql = "SELECT * FROM fichefrais 
+	$sql = "SELECT * FROM FicheFrais 
 			WHERE id='$id' 
 			LIMIT 1";
 
@@ -60,7 +60,7 @@ if($_GET['id'] == "") { 	//on vérifie que l'id de la fiche est renseigné
 		//récupération du libelle de l'état
 		$idEtat = $fiche['idEtat'];
 
-		$sql = "SELECT libelle FROM etat 
+		$sql = "SELECT libelle FROM Etat 
 				WHERE id = '$idEtat' 
 				LIMIT 1";
 		$fiche['etatLibelle'] = champSQL($sql);
@@ -86,7 +86,7 @@ if($_GET['id'] == "") { 	//on vérifie que l'id de la fiche est renseigné
 
 
 			//on récupére le montant et la quantité et on les mets dans un tableau
-			$sql = "SELECT quantite FROM lignefraisforfait
+			$sql = "SELECT quantite FROM LigneFraisForfait
 					WHERE idFicheFrais = '$idFiche'
 					AND idForfait = '$idForfait'";
 			$quantite = secureVariable(champSQL($sql));

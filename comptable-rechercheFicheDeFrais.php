@@ -32,7 +32,7 @@ include 'layouts/flash.inc.php';
 						
 							//récupérer tous les utilisateurs et les affiches dans un select
 							$sql = "SELECT id, nom, prenom, login 
-									FROM visiteur 
+									FROM Visiteur 
 									ORDER BY nom"; 			
 							$resultDataVisiteurs = tableSQL($sql);
 							
@@ -86,7 +86,7 @@ include 'layouts/flash.inc.php';
 						<?php
 						
 							$sql = "SELECT DISTINCT annee 
-									FROM fichefrais 
+									FROM FicheFrais 
 									ORDER BY annee";        //récupérer toutes les années qui possède une fiche de frais
 							$resultDataAnnees = tableSQL($sql);
 							
@@ -143,7 +143,7 @@ include 'layouts/flash.inc.php';
 		
 
 		//récupération des infos dans la base de donnée	
-		$sql = "SELECT * FROM fichefrais 
+		$sql = "SELECT * FROM FicheFrais 
 				WHERE mois='$mois' 
 				AND annee='$annee' 
 				AND idVisiteur='$visiteurID' 
@@ -167,13 +167,13 @@ include 'layouts/flash.inc.php';
 		//récupération du libelle de l'état
 		$idEtat = $fiche['idEtat'];
 
-		$sql = "SELECT libelle FROM etat 
+		$sql = "SELECT libelle FROM Etat 
 				WHERE id = '$idEtat' 
 				LIMIT 1";
 		$fiche['etatLibelle'] = champSQL($sql);
 
 
-		$sql          = "SELECT * FROM forfait";
+		$sql          = "SELECT * FROM Forfait";
 		$listeForfait = tableSQL($sql);
 
 
@@ -193,7 +193,7 @@ include 'layouts/flash.inc.php';
 
 
 			//on récupére le montant et la quantité et on les mets dans un tableau
-			$sql = "SELECT quantite FROM lignefraisforfait
+			$sql = "SELECT quantite FROM LigneFraisForfait
 					WHERE idFicheFrais = '$idFiche'
 					AND idForfait = '$idForfait'";
 			$quantite = secureVariable(champSQL($sql));

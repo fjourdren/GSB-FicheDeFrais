@@ -41,7 +41,7 @@ include 'layouts/flash.inc.php';
 	<?php
 
 
-		$sql = "SELECT * FROM visiteur";			//requete sql qui récupère tous les visiteurs
+		$sql = "SELECT * FROM Visiteur";			//requete sql qui récupère tous les visiteurs
 		
 		$visiteurs = tableSQL($sql);								//execute la requete
 				

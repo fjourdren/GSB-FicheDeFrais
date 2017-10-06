@@ -26,7 +26,7 @@ if($id == null) {
 
 
 //on récupére les valeur du forfait
-$sql = "SELECT * FROM forfait 
+$sql = "SELECT * FROM Forfait 
 		WHERE id='$id'";
 
 $forfait = ligneSQL($sql);

@@ -19,7 +19,7 @@ if (($_POST['password'] == null)
 $pseudo   = secureVariable($_POST['pseudo']);
 $password = md5($_POST['password']);
 
-$sql = "SELECT * FROM visiteur 
+$sql = "SELECT * FROM Visiteur 
 		WHERE login='$pseudo' 
 		AND pwd='$password' 
 		LIMIT 1";			//requete sql

@@ -48,11 +48,11 @@ if((!is_numeric($montant))
 
 
 //Select du vieux montant du forfait pour mettre à jour les fiches de frais
-$sql = "SELECT montant FROM forfait WHERE id='$id'";
+$sql = "SELECT montant FROM Forfait WHERE id='$id'";
 $oldMontant = champSQL($sql);
 
 
-$sql = "UPDATE forfait
+$sql = "UPDATE Forfait
 		SET libelle='$libelle', montant='$montant'  
 		WHERE id='$id'";
 

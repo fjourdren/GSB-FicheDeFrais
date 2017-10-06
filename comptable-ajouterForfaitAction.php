@@ -42,7 +42,7 @@ if((!is_numeric($montant))
 
 
 //vérification unicité de l'ID
-$sql = "SELECT id FROM forfait WHERE id='$id' LIMIT 1";
+$sql = "SELECT id FROM Forfait WHERE id='$id' LIMIT 1";
 
 if(compteSQL($sql) == 1) {
 	//mise en session du message flash et redirection
@@ -53,7 +53,7 @@ if(compteSQL($sql) == 1) {
 
 
 
-$sql = "INSERT INTO forfait(id, libelle, montant) 
+$sql = "INSERT INTO Forfait(id, libelle, montant) 
 		VALUES('$id', '$libelle', '$montant')";
 
 $resultat = executeSQL($sql);

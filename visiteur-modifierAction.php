@@ -18,7 +18,7 @@ $nbJustificatifs = secureVariable($_POST['nbJustificatifs']);
 
 
 //rÃ©cupÃ©ration de la fiche de frais
-$sql        = "SELECT * FROM fichefrais 
+$sql        = "SELECT * FROM FicheFrais 
 				WHERE id='$id'
 				LIMIT 1";
 $fichefrais = tableSQL($sql)[0];
@@ -44,7 +44,7 @@ if($fichefrais['idEtat'] != "CR") {
 $idFiche = $fichefrais['id'];
 
 
-$sql = "SELECT idForfait, quantite FROM lignefraisforfait
+$sql = "SELECT idForfait, quantite FROM LigneFraisForfait
 		WHERE idFicheFrais='$idFiche'";
 
 $lignesFiche = tableSQL($sql);
@@ -52,7 +52,7 @@ $lignesFiche = tableSQL($sql);
 
 
 
-$sql                 = "SELECT id, montant FROM forfait";
+$sql                 = "SELECT id, montant FROM Forfait";
 $listeForfaits       = tableSQL($sql);
 $montantFicheDeFrais = 0;
 
@@ -84,11 +84,11 @@ foreach ($listeForfaits as $key => $forfait) {
 					
 					//choix entre upload et insert en fonction de l'ancienne valeur
 					if($ancienneValeur == -1) {
-						$sql = "INSERT INTO lignefraisforfait(idFicheFrais, idForfait, quantite)
+						$sql = "INSERT INTO LigneFraisHorsForfait(idFicheFrais, idForfait, quantite)
 						VALUES ('$idFiche', '$forfaitID', '$valeurFormDuForfait')";
 						executeSQL($sql);
 					} else {
-						$sql = "UPDATE lignefraisforfait
+						$sql = "UPDATE LigneFraisHorsForfait
 								SET quantite='$valeurFormDuForfait' 
 								WHERE idFicheFrais='$idFiche' 
 								AND idForfait='$forfaitID'";
@@ -100,7 +100,7 @@ foreach ($listeForfaits as $key => $forfait) {
 }
 
 //calcul du montant total de la fiche de frais.
-$sql = "SELECT quantite, montant FROM lignefraisforfait, forfait
+$sql = "SELECT quantite, montant FROM LigneFraisHorsForfait, forfait
 		WHERE forfait.id = lignefraisforfait.idForfait
 		AND lignefraisforfait.idFicheFrais = '$idFiche'";
 $lignesFiche = tableSQL($sql);
@@ -163,7 +163,7 @@ executeSQL($sqlConcat); //exécute la commande sql concaténé
 
 
 //upload le montant de la fiche de frais et le nombre de justificatif
-$sql = "UPDATE fichefrais
+$sql = "UPDATE FicheFrais
 		SET montantValide='$montant',
 		nbJustificatifs='$nbJustificatifs'
 		WHERE id='$id'";

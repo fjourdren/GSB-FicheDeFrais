@@ -10,7 +10,7 @@ if(date('j') == NUMERO_JOUR_DE_CLOTURE) {
 	$annee = date('Y');
 
 	//mise en cloture des fiches du mois
-	$sql = "UPDATE fichefrais 
+	$sql = "UPDATE FicheFrais 
 			SET idEtat='CL' 
 			WHERE mois='$mois' 
 			AND annee='$annee'";

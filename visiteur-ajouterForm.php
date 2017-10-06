@@ -90,7 +90,7 @@ include 'layouts/flash.inc.php';
 		
 			<tbody>
 				<?php
-					$sql = "SELECT id, libelle FROM forfait";
+					$sql = "SELECT id, libelle FROM Forfait";
 					$listeForfaits = tableSQL($sql);
 
 					foreach ($listeForfaits as $key => $forfait) {

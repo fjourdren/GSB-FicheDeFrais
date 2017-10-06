@@ -45,7 +45,7 @@ $pwd     = md5($_POST['pwd']);
 
 
 //V�rification unicit� des logins
-$sql = "SELECT login FROM visiteur WHERE login='$login' LIMIT 1";
+$sql = "SELECT login FROM Visiteur WHERE login='$login' LIMIT 1";
 
 if(compteSQL($sql) == 1) {
 	//mise en session du message flash
@@ -56,7 +56,7 @@ if(compteSQL($sql) == 1) {
 
 
 
-$sql = "INSERT INTO visiteur(nom, prenom, adresse, cp, ville, login, pwd, DateEmbauche) 
+$sql = "INSERT INTO Visiteur(nom, prenom, adresse, cp, ville, login, pwd, DateEmbauche) 
 		VALUES('$nom', '$prenom', '$adresse', '$cp', '$ville', '$login', '$pwd', NOW())";
 
 $resultat = executeSQL($sql);

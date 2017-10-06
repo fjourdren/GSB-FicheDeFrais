@@ -18,7 +18,7 @@ include 'layouts/flash.inc.php';
 //on met toutes les valeurs des forfaits de la fiche dans un tableau unique
 $idVisiteur = secureVariable($_SESSION['idVisiteur']);
 
-$sql = "SELECT * FROM fichefrais 
+$sql = "SELECT * FROM FicheFrais 
 		WHERE idVisiteur = '$idVisiteur' 
 		ORDER BY annee DESC, mois DESC";
 
@@ -40,7 +40,7 @@ if(count($fichesfraisList) != 0) {
 		//récupération du libelle de l'état
 		$idEtat = $fiche['idEtat'];
 	
-		$sql = "SELECT libelle FROM etat 
+		$sql = "SELECT libelle FROM Etat 
 		WHERE id = '$idEtat' 
 		LIMIT 1";
 		$fichesfraisList[$keyFiche]['etatLibelle'] = champSQL($sql);

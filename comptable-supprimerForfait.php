@@ -35,7 +35,7 @@ if($_GET['id'] != "") {
 	
 	
 	//requete sql qui supprime le forfait
-	$sql = "DELETE FROM forfait
+	$sql = "DELETE FROM Forfait
 	WHERE id='$id'";
 	$resultat = executeSQL($sql);
 	

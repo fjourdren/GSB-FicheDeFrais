@@ -37,7 +37,7 @@ if($day >= NUMERO_JOUR_DE_CLOTURE) {
 
 
 //vérifie si une fiche de frais n'est pas déjà créer pour ce mois ci
-$sql = "SELECT * FROM fichefrais 
+$sql = "SELECT * FROM FicheFrais 
 		WHERE mois='$month' 
 		AND annee='$year' 
 		AND idVisiteur='$idVisiteur'
@@ -49,13 +49,13 @@ if(compteSQL($sql) != 0) {
 	exit;
 }
 
-$sql = "INSERT INTO fichefrais(idVisiteur, mois, annee, dateModif, idEtat, nbJustificatifs)
+$sql = "INSERT INTO FicheFrais(idVisiteur, mois, annee, dateModif, idEtat, nbJustificatifs)
 		VALUES ('$idVisiteur', '$month', '$year', NOW(), 'CR', '$nbJustificatifs')";
 
 executeSQL($sql);
 
 
-$sql = "SELECT * FROM fichefrais 
+$sql = "SELECT * FROM FicheFrais 
 		WHERE idVisiteur='$idVisiteur' 
 		AND mois='$month' 
 		AND annee='$year'
@@ -70,7 +70,7 @@ addFlash('Succ&#232;s', 'Fiche de frais cr&#233;&#233;e');
 
 
 //GESTION DES LIGNES
-$sql                 = "SELECT id, montant FROM forfait";
+$sql                 = "SELECT id, montant FROM Forfait";
 $listeForfaits       = tableSQL($sql);
 $montantFicheDeFrais = 0;
 
@@ -89,7 +89,7 @@ foreach ($listeForfaits as $key => $forfait) {
 			header('location: visiteur-listeFicheFrais.php');
 		}
 
-		$sql = "INSERT INTO lignefraisforfait(idFicheFrais, idForfait, quantite) 
+		$sql = "INSERT INTO LigneFraisForfait(idFicheFrais, idForfait, quantite) 
 				VALUES ('$idFicheFrais', '$forfaitID', '$valeurFormDuForfait')";
 		executeSQL($sql);
 
@@ -144,7 +144,7 @@ executeSQL($sqlConcat);
 
 
 //on enregistre le montant de la fiche de frais
-$sql = "UPDATE fichefrais SET montantValide='$montantFicheDeFrais' 
+$sql = "UPDATE FicheFrais SET montantValide='$montantFicheDeFrais' 
 		WHERE id='$idFicheFrais'";
 executeSQL($sql);
 

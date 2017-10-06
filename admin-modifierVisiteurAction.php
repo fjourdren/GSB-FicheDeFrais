@@ -35,7 +35,7 @@ $id = secureVariable($_POST['id']);
 
 if($_POST['pwd'] == null) {
 
-	$sql = "SELECT * FROM visiteur 
+	$sql = "SELECT * FROM Visiteur 
 			WHERE id='$id' 
 			LIMIT 1";			//requete sql qui récupère le visiteur
 
@@ -66,7 +66,7 @@ $login   = secureVariable($_POST['login']);
 
 
 //V�rification unicit� des logins
-$sql = "SELECT login FROM visiteur WHERE login='$login' AND id <> '$id' LIMIT 1";
+$sql = "SELECT login FROM Visiteur WHERE login='$login' AND id <> '$id' LIMIT 1";
 
 if(compteSQL($sql) == 1) {
 	//mise en session du message flash
@@ -76,7 +76,7 @@ if(compteSQL($sql) == 1) {
 }
 
 
-$sql = "UPDATE visiteur 
+$sql = "UPDATE Visiteur 
 		SET nom='$nom', prenom='$prenom', adresse='$adresse', cp='$cp', ville='$ville', login='$login', pwd='$pwd' 
 		WHERE id='$id'";
 
