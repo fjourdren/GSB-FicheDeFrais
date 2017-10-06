@@ -72,8 +72,8 @@ CREATE TABLE IF NOT EXISTS `FicheFrais` (
   `dateModif` date DEFAULT NULL,
   `idEtat` char(2) DEFAULT 'CR',
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`idEtat`) REFERENCES Etat(`id`),
-  FOREIGN KEY (`idVisiteur`) REFERENCES Visiteur(`id`)
+  FOREIGN KEY (`idEtat`) REFERENCES Etat(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (`idVisiteur`) REFERENCES Visiteur(`id`)  ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB;
 
 
