@@ -84,11 +84,11 @@ foreach ($listeForfaits as $key => $forfait) {
 					
 					//choix entre upload et insert en fonction de l'ancienne valeur
 					if($ancienneValeur == -1) {
-						$sql = "INSERT INTO LigneFraisHorsForfait(idFicheFrais, idForfait, quantite)
+						$sql = "INSERT INTO LigneFraisForfait(idFicheFrais, idForfait, quantite)
 						VALUES ('$idFiche', '$forfaitID', '$valeurFormDuForfait')";
 						executeSQL($sql);
 					} else {
-						$sql = "UPDATE LigneFraisHorsForfait
+						$sql = "UPDATE LigneFraisForfait
 								SET quantite='$valeurFormDuForfait' 
 								WHERE idFicheFrais='$idFiche' 
 								AND idForfait='$forfaitID'";
@@ -100,7 +100,7 @@ foreach ($listeForfaits as $key => $forfait) {
 }
 
 //calcul du montant total de la fiche de frais.
-$sql = "SELECT quantite, montant FROM LigneFraisHorsForfait, forfait
+$sql = "SELECT quantite, montant FROM LigneFraisForfait, forfait
 		WHERE forfait.id = lignefraisforfait.idForfait
 		AND lignefraisforfait.idFicheFrais = '$idFiche'";
 $lignesFiche = tableSQL($sql);
