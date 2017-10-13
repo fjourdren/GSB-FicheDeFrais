@@ -28,7 +28,7 @@ $resultat = tableSQL($sql);								//execute la requete
 
 if (count($resultat) != 1) {					//	compte le nombre de resultat
 	//mise en session du message flash
-	addFlash('Erreur', 'Cette utilisateur n\'existe pas.');
+	addFlash('Erreur', 'Cet utilisateur n\'existe pas.');
 
 	header('location: connexion.php');							//redirige vers login.php
 	exit;
