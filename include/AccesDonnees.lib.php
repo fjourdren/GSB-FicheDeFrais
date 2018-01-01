@@ -17,7 +17,7 @@
 */
 
 
-$modeacces = "mysql";
+$modeacces = "mysqli";
 
 
 $mysql_data_type_hash = array(
