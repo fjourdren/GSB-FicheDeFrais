@@ -6,7 +6,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Base de données: `gsb_frais`
+-- Base de donnï¿½es: `gsb_frais`
 --
 
 -- --------------------------------------------------------
@@ -130,10 +130,10 @@ INSERT INTO Visiteur(nom, prenom, login, pwd, DateEmbauche) VALUES
 --
 
 INSERT INTO `Etat` (`id`, `libelle`) VALUES
-('CL', 'Saisie clôturée'),
-('CR', 'Fiche créée, saisie en cours'),
-('RB', 'Remboursée'),
-('VA', 'Validée et mise en paiement');
+('CL', 'Saisie clÃ´turÃ©e'),
+('CR', 'Fiche crÃ©Ã©e, saisie en cours'),
+('RB', 'RemboursÃ©e'),
+('VA', 'ValidÃ©e et mise en paiement');
 
 -- --------------------------------------------------------
 
@@ -145,6 +145,6 @@ INSERT INTO `Etat` (`id`, `libelle`) VALUES
 
 INSERT INTO `Forfait` (`id`, `libelle`, `montant`) VALUES
 ('ETP', 'Forfait Etape', '110.00'),
-('KM', 'Frais Kilométrique', '0.62'),
+('KM', 'Frais KilomÃ©trique', '0.62'),
 ('REP', 'Repas Restaurant', '25.00'),
-('NUI', 'Nuitée Hôtel', '80.00');
+('NUI', 'NuitÃ©e HÃ´tel', '80.00');
