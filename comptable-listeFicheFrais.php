@@ -37,12 +37,6 @@ if(count($fichesfraisList) != 0) {
 		$fichesfraisList[$keyFiche]['visiteur'] = $visiteur['prenom']." ".$visiteur['nom'];
 		
 	
-		//on retire les id numériques du tableau
-		foreach ($fiche as $key => $valeurDansTableau) {
-			if(is_numeric($key)) {
-				unset($fiche[$key]);
-			}
-		}
 	
 	
 		//récupération du libelle de l'état

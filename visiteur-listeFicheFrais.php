@@ -26,16 +26,7 @@ $fichesfraisList = tableSQL($sql);
 
 if(count($fichesfraisList) != 0) {
 
-	foreach ($fichesfraisList as $keyFiche => $fiche) {
-	
-		//on retire les id numériques du tableau
-		foreach ($fiche as $key => $valeurDansTableau) {
-			if(is_numeric($key)) {
-				unset($fiche[$key]);
-			}
-		}
-	
-	
+	foreach ($fichesfraisList as $keyFiche => $fiche) {	
 	
 		//récupération du libelle de l'état
 		$idEtat = $fiche['idEtat'];

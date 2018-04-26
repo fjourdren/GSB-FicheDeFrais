@@ -150,7 +150,7 @@ executeSQL($sql);
 
 
 //mise en session du message flash
-header('location: visiteur-ajouterForm.php');
+header('location: visiteur-listeFicheFrais.php');
 exit;
 
 ?>

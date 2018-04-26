@@ -170,6 +170,15 @@ function tableSQL($sql) {
 		}
 	}
 
+
+
+	//on retire les numériques du tableau
+	/*foreach ($rows as $key => $row) {
+		if(is_numeric($key)) {
+			unset($rows[$key]);
+		}
+	}*/
+
 	return $rows;
 
 }

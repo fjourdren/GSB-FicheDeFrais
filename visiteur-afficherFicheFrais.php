@@ -48,15 +48,6 @@ if($_GET['id'] == "") { 	//on vérifie que l'id de la fiche est renseigné
 		}
 
 
-		//on retire les id numériques du tableau
-		foreach ($fiche as $key => $valeurDansTableau) {
-			if(is_numeric($key)) {
-				unset($fiche[$key]);
-			}
-		}
-
-
-
 		//récupération du libelle de l'état
 		$idEtat = $fiche['idEtat'];
 

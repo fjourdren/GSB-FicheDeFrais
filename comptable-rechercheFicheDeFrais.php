@@ -150,77 +150,60 @@ include 'layouts/flash.inc.php';
 				LIMIT 1";
 
 		// on vérifie que la fiche existe avant l'affichage
-		if(compteSQL($sql)!=0) {
+		if(compteSQL($sql) != 0) {
 			$fiche = tableSQL($sql)[0]; // on récupère la seul fiche retourné
 
 
 
-		//on retire les id numériques du tableau
-		foreach ($fiche as $key => $valeurDansTableau) {
-			if(is_numeric($key)) {
-				unset($fiche[$key]);
+			//récupération du libelle de l'état
+			$idEtat = $fiche['idEtat'];
+
+			$sql = "SELECT libelle FROM Etat 
+					WHERE id = '$idEtat' 
+					LIMIT 1";
+			$fiche['etatLibelle'] = champSQL($sql);
+
+
+			$sql          = "SELECT * FROM Forfait";
+			$listeForfait = tableSQL($sql);
+
+
+			foreach ($listeForfait as $keyForfait => $forfait) {
+
+				//on récupére les de chaque champ pour chaque fiche de frais
+				$idFiche   = $fiche['id'];
+				$idForfait = $forfait['id'];
+
+
+				//on récupére le montant et la quantité et on les mets dans un tableau
+				$sql = "SELECT quantite FROM LigneFraisForfait
+						WHERE idFicheFrais = '$idFiche'
+						AND idForfait = '$idForfait'";
+				$quantite = secureVariable(champSQL($sql));
+
+				if(!$quantite)
+					$quantite = 0;
+
+
+				$fiche['lignes'][] = array("forfait" => $idForfait, "libelle" => $forfait['libelle'], "quantite" => $quantite, "montant" => $forfait['montant']);
+
 			}
-		}
 
 
 
-		//récupération du libelle de l'état
-		$idEtat = $fiche['idEtat'];
 
-		$sql = "SELECT libelle FROM Etat 
-				WHERE id = '$idEtat' 
-				LIMIT 1";
-		$fiche['etatLibelle'] = champSQL($sql);
+			//hors forfait
+			$sql = "SELECT * FROM LigneFraisHorsForfait
+					WHERE idFicheFrais = '$idFiche'";
 
+			$horsForfaitsResult = tableSQL($sql);
 
-		$sql          = "SELECT * FROM Forfait";
-		$listeForfait = tableSQL($sql);
-
-
-		foreach ($listeForfait as $keyForfait => $forfait) {
-
-			//on retire les id numériques du tableau
-			foreach ($forfait as $key => $valueForfait) {
-				if(is_numeric($key)) {
-					unset($listeForfait[$keyForfait][$key]);
-				}
+			foreach ($horsForfaitsResult as $key => $horsForfaitItem) {
+				$fiche['lignesFraisHorsForfait'][] = array("libFraisHF" => $horsForfaitItem['libFraisHF'], "dteFraisHF" => $horsForfaitItem['dteFraisHF'], "quantite" => $horsForfaitItem['quantite'], "montant" => $horsForfaitItem['montant']);
 			}
-
-
-			//on récupére les de chaque champ pour chaque fiche de frais
-			$idFiche   = $fiche['id'];
-			$idForfait = $forfait['id'];
-
-
-			//on récupére le montant et la quantité et on les mets dans un tableau
-			$sql = "SELECT quantite FROM LigneFraisForfait
-					WHERE idFicheFrais = '$idFiche'
-					AND idForfait = '$idForfait'";
-			$quantite = secureVariable(champSQL($sql));
-
-			if(!$quantite)
-				$quantite = 0;
-
-
-			$fiche['lignes'][] = array("forfait" => $idForfait, "libelle" => $forfait['libelle'], "quantite" => $quantite, "montant" => $forfait['montant']);
-
-		}
-
-
-
-
-		//hors forfait
-		$sql = "SELECT * FROM LigneFraisHorsForfait
-				WHERE idFicheFrais = '$idFiche'";
-
-		$horsForfaitsResult = tableSQL($sql);
-
-		foreach ($horsForfaitsResult as $key => $horsForfaitItem) {
-		$fiche['lignesFraisHorsForfait'][] = array("libFraisHF" => $horsForfaitItem['libFraisHF'], "dteFraisHF" => $horsForfaitItem['dteFraisHF'], "quantite" => $horsForfaitItem['quantite'], "montant" => $horsForfaitItem['montant']);
-		}
 		
 
-?>
+			?>
 
 			<table>
 				<thead>
