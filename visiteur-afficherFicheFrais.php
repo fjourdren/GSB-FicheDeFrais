@@ -57,7 +57,7 @@ if($_GET['id'] == "") { 	//on vérifie que l'id de la fiche est renseigné
 		$fiche['etatLibelle'] = champSQL($sql);
 
 
-		$sql          = "SELECT * FROM forfait";
+		$sql          = "SELECT * FROM Forfait";
 		$listeForfait = tableSQL($sql);
 
 
