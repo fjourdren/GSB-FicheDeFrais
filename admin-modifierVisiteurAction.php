@@ -28,8 +28,20 @@ if(($_POST['id']==null)
 }
 
 
+
+
 $id = secureVariable($_POST['id']);
 
+
+if(isset($_POST['cp']))
+	if(!is_numeric($_POST['cp'])
+		|| strlen($_POST['cp']) != 5) {
+		//mise en session du message flash
+		addFlash('Erreur', 'Code postal non valide.');
+		header('location: admin-modifierVisiteurForm.php?id='.$id.'');
+		exit;
+	}
+}
 
 
 

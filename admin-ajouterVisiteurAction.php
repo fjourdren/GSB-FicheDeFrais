@@ -26,6 +26,20 @@ if(($_POST['nom'] == null)
 
 }
 
+
+if(isset($_POST['cp']))
+	if(!is_numeric($_POST['cp'])
+		|| strlen($_POST['cp']) != 5) {
+		//mise en session du message flash
+		addFlash('Erreur', 'Code postal non valide.');
+		header('location: admin-ajouterVisiteurForm.php');
+		exit;
+	}
+}
+
+
+
+
 if($_POST['pwd'] != $_POST['repwd']) {
 	addFlash('Erreur', 'Les mots de passe ne sont pas identiques.');
 	header('location: admin-ajouterVisiteurForm.php');

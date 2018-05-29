@@ -100,9 +100,9 @@ foreach ($listeForfaits as $key => $forfait) {
 }
 
 //calcul du montant total de la fiche de frais.
-$sql = "SELECT quantite, montant FROM LigneFraisForfait, forfait
-		WHERE forfait.id = lignefraisforfait.idForfait
-		AND lignefraisforfait.idFicheFrais = '$idFiche'";
+$sql = "SELECT quantite, montant FROM LigneFraisForfait, Forfait
+		WHERE Forfait.id = LigneFraisForfait.idForfait
+		AND LigneFraisForfait.idFicheFrais = '$idFiche'";
 $lignesFiche = tableSQL($sql);
 
 $montant = 0;
