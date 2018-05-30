@@ -27,7 +27,7 @@ if(($_POST['nom'] == null)
 }
 
 
-if(isset($_POST['cp']))
+if(isset($_POST['cp'])) {
 	if(!is_numeric($_POST['cp'])
 		|| strlen($_POST['cp']) != 5) {
 		//mise en session du message flash
