@@ -13,21 +13,23 @@ if(($_SESSION['login'] != ADMINNAME) && ($_SESSION['login'] != COMPTANAME)) { 	/
 
 
 
+if(isset($_POST['cp'])) {
+	if(($_POST['nom'] == null) 
+		|| ($_POST['prenom'] == null) 
+		|| ($_POST['login'] == null) 
+		|| ($_POST['pwd'] == null) 
+		|| ($_POST['repwd'] == null)) {
 
-if(($_POST['nom'] == null) 
-	|| ($_POST['prenom'] == null) 
-	|| ($_POST['login'] == null) 
-	|| ($_POST['pwd'] == null) 
-	|| ($_POST['repwd'] == null)) {
+		addFlash('Erreur', 'Merci de remplir les champs obligatoires.');
+		header('location: admin-ajouterVisiteurForm.php');
+		exit;
 
-	addFlash('Erreur', 'Merci de remplir les champs obligatoires.');
-	header('location: admin-ajouterVisiteurForm.php');
-	exit;
-
+	}
 }
 
 
-if(isset($_POST['cp'])) {
+
+if(!empty($_POST['cp'])) {
 	if(!is_numeric($_POST['cp'])
 		|| strlen($_POST['cp']) != 5) {
 		//mise en session du message flash
