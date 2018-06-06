@@ -72,6 +72,7 @@ $dateLimitMotDePasse= strtotime("+".TEMPS_VALIDITE_PASSWORD." days", strtotime($
 
 $now = date("Y-m-d");
 $limit = date("Y-m-d", $dateLimitMotDePasse);
+
 if($now >= $limit) {
 	header('location: visiteur-changerMotDePasseForm.php');							//redirige vers index.php
 	exit;
