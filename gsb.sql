@@ -50,11 +50,26 @@ CREATE TABLE IF NOT EXISTS `Visiteur` (
   `ville` varchar(60) DEFAULT NULL,
   `dateEmbauche` date DEFAULT NULL,
   `login` char(60) NOT NULL,
-  `pwd` char(32)  NOT NULL,
 
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
 
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `historiquePassword`
+--
+
+CREATE TABLE IF NOT EXISTS `historiquePassword` (
+  `idVisiteur` int UNSIGNED NOT NULL,
+  `pwd` char(32) NOT NULL,
+  `updated_date` date NOT NULL,
+
+  PRIMARY KEY (`idVisiteur`, `pwd`)
+) ENGINE=InnoDB;
+
+ALTER TABLE `historiquePassword` ADD CONSTRAINT `historiquePassword_visiteur` FOREIGN KEY (`idVisiteur`) REFERENCES `Visiteur`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- --------------------------------------------------------
 
@@ -118,9 +133,22 @@ ALTER TABLE `LigneFraisHorsForfait` ADD CONSTRAINT `LigneFraisHorsForfait_FicheF
 -- Insert `Visiteur`
 --
 
-INSERT INTO Visiteur(nom, prenom, login, pwd, DateEmbauche) VALUES
-('comptable', 'comptable', 'comptable', md5('comptable'), NOW()),
-('admin', 'admin', 'admin', md5('admin'), NOW());
+INSERT INTO Visiteur(nom, prenom, login, DateEmbauche) VALUES
+('comptable', 'comptable', 'comptable', NOW()),
+('admin', 'admin', 'admin', NOW());
+
+
+-- --------------------------------------------------------
+
+
+--
+-- Insert `historiquePassword`
+--
+
+INSERT INTO `historiquePassword` (`idVisiteur`, `pwd`, `updated_date`) VALUES
+(1, md5('comptable'), NOW()),
+(2, md5('admin'), NOW());
+
 
 -- --------------------------------------------------------
 

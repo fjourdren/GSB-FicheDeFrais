@@ -4,6 +4,8 @@ define('COMPTANAME', 'comptable');
 
 define('NUMERO_JOUR_DE_CLOTURE', 20);
 
+define('TEMPS_VALIDITE_PASSWORD', 30);
+
 if(php_sapi_name() === 'cli') {
 	$host = false;
 } else {
